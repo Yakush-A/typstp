@@ -6,3 +6,5 @@
 
 #include "test/example.typ"
 
+#bibliography("sources.bib")
+
