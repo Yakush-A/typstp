@@ -1,9 +1,20 @@
+#let font-size = 14pt
+#let main-font = "Times New Roman"
+#let source-text-font = "Courier New"
+#let line-height = 18pt
+#let right-leadind = line-height - font-size
+
+#let cyr-letters = "абвгдеёжзиклмнопрстуфхцчшщъыьэюя".clusters()
+
+#let attachment-counter = counter("attachment")
+#let attachment-letters = "АБВГДЕЖИКЛМНПРСТУФХЦШЩЭЮЯ".clusters()
+
 #let template(body) = [
 
   // Общие настройки шрифта из 2.1.1
   #set text(
-    font: "Times New Roman",
-    size: 14pt,
+    font: main-font,
+    size: font-size,
     top-edge: 1em,      // установка top-edge и bottom-edge 
     bottom-edge: 0em,   // чтобы правильно работал leading
 
@@ -47,11 +58,8 @@
   #set par(
     justify: true,
   
-    // 4pt это разница между
-    // межстрочным интервалом 18пт
-    // и размером шрифта 14пт
-    leading: 4pt, 
-    spacing: 4pt,
+    leading: right-leadind, 
+    spacing: right-leadind,
 
     // абзацный отступ (красная строка)
     first-line-indent: (
@@ -70,18 +78,14 @@
     marker: [--],
   )
 
+  #show list.item: it => {
+    par()[-- #it.body]
+
+  }
+
 
   
   // Перечисление со ссылками на его элементы
-
-  // кириллический алфавит для нумерации по буквам
-  #let cyr-letters = (
-    "а", "б", "в", "г", "д", "е", "ё", "ж",
-    "з", "и", "й", "к", "л", "м", "н", "о",
-    "п", "р", "с", "т", "у", "ф", "х", "ц",
-    "ч", "ш", "щ", "ъ", "ы", "ь", "э", "ю",
-    "я",
-  )
 
   // нумерация для 2.3.8
   //
@@ -107,9 +111,17 @@
   }
 
   #set enum(
-    numbering: refed-enum-numbering,
+//    numbering: refed-enum-numbering,
+    numbering: "1",
     full: true,
   )
+
+  #show enum.item: it => {
+    par[
+    #it.number
+    #it.body
+    ]
+  }
 
 
 
@@ -124,8 +136,8 @@
 
   // Настройки текста для заголовков из 2.1.1, 2.2.1 - 2.2.5
   #show heading: set text(
-    font: "Times New Roman",
-    size: 14pt,
+    font: main-font, 
+    size: font-size,
     weight: "bold",
     hyphenate: false,    // отключение переносов
   )
@@ -155,6 +167,7 @@
 
     // добавление разрыва страницы (2.2.6) 
     pagebreak() + it
+
   } 
 
   #show heading.where(numbering: none): it => {
@@ -288,12 +301,24 @@
   #set figure(
 
     // устанавливает нумерацию раздел.номер
+    // или буква приложения.номер
     numbering: (..nums) => {
-      numbering(
-        "1.1",
-        counter(heading).get().first(),
-        nums.pos().first(),
-      )
+
+      let n = nums.pos().first()
+
+      if attachment-counter.get().first() == 0 {
+        numbering(
+          "1.1",
+          counter(heading).get().first(),
+          n,
+        )
+      } else {
+        attachment-letters.at( 
+          attachment-counter.get().first() -1
+        )
+        [.]
+        str(n)
+      }
     }
   )
 
@@ -313,7 +338,7 @@
   // добавление отступов перед рисунком и после подписи
   #show figure.where(kind: image): it => {
 
-    v(1.0em + 4pt, weak: true)
+    v(1.0em + right-leadind, weak: true)
     it
     v(1.0em, weak: true)
 
@@ -326,12 +351,12 @@
   #show figure.caption.where(kind: table): set align(left)
   #show figure.where(kind: table): set figure(
     supplement: "Таблица",
-    gap: 4pt,
+    gap: right-leadind,
   )
 
   #show figure.where(kind: table): it => {
 
-    v(1.0em + 4pt, weak: true)
+    v(1.0em + right-leadind, weak: true)
     it
     v(1.0em, weak: true)
 
@@ -348,17 +373,17 @@
   )
 
   #set footnote.entry(
-    gap: 4pt,
+    gap: right-leadind,
   )
 
   #show footnote.entry: it => {
 
     set text(
-      size: 14pt,
+      size: font-size,
     )
     set par(
-      spacing: 4pt,
-      leading: 4pt,
+      spacing: right-leadind,
+      leading: right-leadind,
     )
 
     h(1.25cm, weak: false)        // абзацный отступ
@@ -414,7 +439,7 @@
   // знаков суммы и т.д., поэтому они 
   // всегда 8, но это "Рекомендуется",
   // так что, наверное, можно
-  #show math.equation: it => {
+  #show math.equation.where(block: true): it => {
     v(8pt, weak: true)
     it 
     v(8pt, weak: true)
@@ -422,7 +447,53 @@
   // остальное по формулам вроде зависит
   // уже от того, кто пишет работу
 
+  #show raw: set text(
+    font: source-text-font,
+  )
+
+  #show raw.where(block: true): it => {
+    v(1.0em, weak: false)
+    it
+    v(1.0em, weak: false)
+  }
+
   #body
 
 ]
+
+#let source-text(path, name) = {
+  let file-content = read(path) 
+
+  [
+    #text(weight: "bold")[
+      #name
+    ]
+    #raw(
+      file-content,
+      block: true,
+    )
+  ]
+}
+
+
+
+#let attachment(
+  type,
+  name,
+) = {
+  heading(
+    numbering: none,
+  )[
+    ПРИЛОЖЕНИЕ #context attachment-letters.at(counter("attachment").get().first())
+  ]
+
+
+  align(center)[
+    
+    (#type)
+
+    * #name *
+  ]
+  
+}
 
