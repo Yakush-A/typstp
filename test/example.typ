@@ -1,4 +1,6 @@
-= ПЕРВЫЙ РАЗДЕЛ
+#import "../template.typ": *
+
+= Первый раздел
 
 == Первый подраздел
 
@@ -29,16 +31,7 @@
   )
 )
 
-===
-Секретные deepseek API:
-- deepseek v4 pro #footnote[Секретный Deepseek API. #lorem(24)]<secret-DS-API>;
-- deepseek v4 flash #footnote[Еще один секретный Deepseek API. #lorem(16)]<another-secret-DS-API>;
-====
-Deepseek V4 Pro -- очень хороший секретный API для большинства секретных задач #cite(<hook1999processors>).
-====
-Deepseek V4 Flash тоже неплох, но он не такой секретный из-за даты выхода раньше Pro модели.
-
-= ВТОРОЙ РАЗДЕЛ
+= Второй раздел, но он длиннющий настолько, что аж на две строки в содержании получился
 
 == Формулы
 #lorem(70)
@@ -61,21 +54,69 @@ $ x_1 = X - beta Y + beta^2 U ; #h(1cm)  x_2 = Y - beta U $
 
 
 
-= ТРЕТИЙ РАЗДЕЛ
+= Третий раздел
 
 == Всякие перечисления
 #lorem(30)
+===
+Секретные deepseek API:
+- deepseek v4 pro #footnote[Секретный Deepseek API. #lorem(24)]<secret-DS-API>;
+- deepseek v4 flash #footnote[Еще один секретный Deepseek API. #lorem(16)]<another-secret-DS-API>;
+====
+Deepseek V4 Pro -- очень хороший секретный API для большинства секретных задач #cite(<hook1999processors>).
+====
+Deepseek V4 Flash тоже неплох, но он не такой секретный из-за даты выхода раньше Pro модели.
+
+===
+#lorem(30)
+
+// Пока что автоматическая нумерация не работает :(
+1. #lorem(23)
+2. #lorem(20)
+3. #lorem(30)
+
+#set enum(numbering: refed-enum-numbering)
 + Первый элемент;
 + Второй;
-  + Чуть глубже во втором;
-  + И еще один;
+  + Второй, но чуть глубже;
+  + Еще один во втором;
 + Третий;
+#set enum(numbering: "1")
+
+#lorem(40)
+
+1. #lorem(30)
+2. #lorem(50)
+3. #lorem(40)
 
 
-#heading(
-  numbering: none,
-)[
-  НЕНУМЕРОВАННЫЙ РАЗДЕЛ
+// Таблички пока не до конца готовы :(
+
+// = Еще один раздел
+//
+// == Оооооочень длинный заголовок подраздела, такой что прям не помещается ну никак
+//
+// ===
+// #lorem(50)
+// #figure(
+//   caption: [Табличка :)],
+//   table(
+//     [Hi], [Helo], [Секретный DeepSeek API]
+//   )
+// )
+//
+//
+// #figure(
+//   caption: [Табличка с прям очень длинным названием, таким что на токены ради него
+//             испарили Байкал],
+//   table(
+//     [Hi], [Helo], [Секретный DeepSeek API]
+//   )
+// )
+
+
+#heading(numbering: none,)[
+  Ненумерованный раздел
 ]
 #lorem(100)
 #parbreak()
