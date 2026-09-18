@@ -127,6 +127,7 @@
   [
     // отображаемое название файла
     #text(weight: "bold")[
+      #v(1.0em, weak: true)
       #name
     ]
     // исходный текст файла
@@ -499,14 +500,75 @@
     gap: right-leadind,
   )
 
+  // добавление к таблице номера в специальном формате
   #show figure.where(kind: table): it => {
 
     v(1.0em + right-leadind, weak: true)
+
+
+    // изменение описания на свое
+    show figure.caption: caption => {
+
+      // grid из двух клеток: одна содержит "Таблица 1.1 -- ", 
+      // вторая само название таблицы
+      grid(
+        columns: (auto, auto),
+        column-gutter: 0.3em,
+
+        // разная нумерация в разделах и приложениях
+        // 
+        // впринципе, такое уже было в рисунках, еще
+        // раз пояснять смысла не вижу
+        //
+        // TODO: сделать чтобы описание таблицы не выходило 
+        // за ее рамки (мб сделать название чисто как в ворде
+        // строку таблицы добавить сверху невидимую :) )
+        if attachment-counter.get().first() == 0 {
+          box({
+            caption.supplement
+            [ ]
+            context counter(figure.where(kind: table)).display()
+            caption.separator
+          })
+        } else {
+          box({
+            caption.supplement
+            [ ]
+            context attachment-letters.at(
+              attachment-counter.get().first() - 1
+            )
+            [.]
+            context counter(figure.where(kind: table)).get().first()
+            caption.separator
+          })
+
+        },
+
+        // текст описания таблицы
+        caption.body
+      )
+    }
+      
     it
     v(1.0em, weak: true)
 
   }
 
+  // делает таблицу разрываемой
+  //
+  // TODO: сделать добавление "Продолжение таблицы" после разрыва
+  #show figure.where(kind: table): set block(breakable: true)
+
+  // Просто ширина линий
+  #set table(
+    stroke: 0.75pt + black,
+
+  )
+
+  // шапки таблицы повторяются
+  #set table.header(
+    repeat: true,
+  )
 
 
   // Сноски 

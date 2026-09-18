@@ -2,17 +2,17 @@
 <style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0">
   <info>
     <title>Russian GOST R 7.0.5-2008 numeric citations with aplhabetic sorting</title>
-    <id>http://www.zotero.org/styles/GOST-R-7.0.5-2008%20numeric%20alphabetic</id>
-    <link href="http://chetvericov.ru/stil-oformleniya-dlya-mendeley-i-zotero-csl-po-gost-r-705-2008/" rel="self"/>
-    <author>
-      <name>Roman Raspopov</name>
-      <email>romanraspopov@gmail.com</email>
-      <uri></uri>
-    </author>    
-    <category citation-format="numeric"/>
-    <category field="generic-base"/>
-    <updated>2013-05-24T01:12:50+00:00</updated>
-    <summary>
+      <id>http://www.zotero.org/styles/GOST-R-7.0.5-2008%20numeric%20alphabetic</id>
+      <link href="http://chetvericov.ru/stil-oformleniya-dlya-mendeley-i-zotero-csl-po-gost-r-705-2008/" rel="self"/>
+      <author>
+        <name>Roman Raspopov</name>
+        <email>romanraspopov@gmail.com</email>
+        <uri></uri>
+      </author>    
+      <category citation-format="numeric"/>
+      <category field="generic-base"/>
+      <updated>2013-05-24T01:12:50+00:00</updated>
+      <summary>
       Russian GOST-2008 style.
       
       За основу были взяты стили Андрея Четверикова с разными видами сортировки (в порядке появления, в алфавитном порядке и с отображением фамилий вместо номеров ссылок), которые прекрасно работали, но не могли обеспечить многих требований ГОСТ 7.0.5-2008 "Библиографическая ссылка", ГОСТ 7.1-2003 "Библиографическая запись и описание" и ГОСТ 7.82-2001 "Библиографическая запись. Библиографическое описание электронных ресурсов". В данном стиле введен большой перечень усовершенствований, который позволил дополнить функционал стилей А. Четверикова.
@@ -30,489 +30,471 @@
       
       Выражаю искреннюю благодарность Андрею Петровичу Фоту за его пособие с очень подробным описанием всех нюансов составления библиографических списков (Фот А.П. Оформление библиографических ссылок на использованные источники в научных работах : методические рекомендации соискателям ученых степеней. – Оренбург: ГОУ «ОГУ», 2005. – 24 с.), а также Андрею Четверикову за разработку основы стилей ГОСТ и их поддержку на сайте (http://chetvericov.ru/stil-oformleniya-dlya-mendeley-i-zotero-csl-po-gost-r-705-2008).
 
-    </summary>
-    <link href="http://protect.gost.ru/document.aspx?control=7&amp;id=173511" rel="documentation"/>
-    <rights>This work is licensed under a Creative Commons Attribution-Share Alike 3.0 Unported License  http://creativecommons.org/licenses/by-sa/3.0/</rights>
-  </info>
+      </summary>
+      <link href="http://protect.gost.ru/document.aspx?control=7&amp;id=173511" rel="documentation"/>
+      <rights>This work is licensed under a Creative Commons Attribution-Share Alike 3.0 Unported License  http://creativecommons.org/licenses/by-sa/3.0/</rights>
+  </info>  
 
-<!--_______________________________________________________________________________
-    ___________________________ ЛОКАЛИЗАЦИЯ ТЕРМИНОВ ______________________________
-    _______________________________________________________________________________ -->
-
-  <locale xml:lang="en">
-    <terms>
-      <term name="et-al"> [et al.]</term>
-      <term name="and others"></term>
-      <term name="page" form="short">p.</term>
-      <term name="number-of-pages" form="short">p.</term>
-      <term name="number-of-volumes" form="short">vols.</term>
-      <term name="note" form="long"></term>
-      <term name="note" form="short"></term>
-      <term name="collection-editor" form="short">coll.</term>
-      <term name="editortranslator" form="short">
-        <single>ed. &amp; trans.</single>
-        <multiple>eds. &amp; trans.</multiple>
-      </term>   
-    </terms>
-  </locale>
 
   <locale xml:lang="ru">
     <terms>
-      <term name="et-al"> [и др.]</term>
+      <term name="et-al">[и др.]</term>
       <term name="and others"></term>
       <term name="page" form="short">с.</term>
       <term name="number-of-pages" form="short">с.</term>
       <term name="number-of-volumes" form="short">т.</term>
-      <term name="note" form="long"></term>
-      <term name="note" form="short"></term>
+      <term name="volume" form="short">т.</term>
+      <term name="issue" form="short">№</term>
+      <term name="editor" form="short">ред.</term>
+      <term name="translator" form="short">пер.</term>
       <term name="collection-editor" form="short">сост.</term>
-      <term name="collection-number" form="short">вып.</term>
-      <term name="translator" form="short">
-        <single>пер.</single>
-        <multiple>пер.</multiple>
-      </term>
-      <term name="editortranslator" form="short">
-        <single>ред. и пер.</single>
-        <multiple>ред. и пер.</multiple>
-      </term>     
-
-      <!-- SHORT MONTH FORMS -->
-      <term name="month-01" form="short">янв.</term>
-      <term name="month-02" form="short">февр.</term>
-      <term name="month-03" form="short">марта</term>
-      <term name="month-04" form="short">апр.</term>
-      <term name="month-05" form="short">мая</term>
-      <term name="month-06" form="short">июня</term>
-      <term name="month-07" form="short">июля</term>
-      <term name="month-08" form="short">авг.</term>
-      <term name="month-09" form="short">сент.</term>
-      <term name="month-10" form="short">окт.</term>
-      <term name="month-11" form="short">нояб.</term>
-      <term name="month-12" form="short">дек.</term>
     </terms>
   </locale>
 
   <locale>
     <terms>
-      <term name="page-range-delimiter">-</term> <!-- Если между номерами страниц нужно тире, а не дефис [С. 56-59], то эту строку нужно закомментировать -->
+      <term name="page-range-delimiter">–</term>
     </terms>
   </locale>
-  
-  <macro name="number-of-volumes">
-    <choose>
-      <if variable="note">        
-        <text variable="number-of-volumes" prefix="in&#160;"/>
-        <label variable="number-of-volumes" form="short" prefix="&#160;"/>
-      </if>
-      <else>
-        <text variable="number-of-volumes" prefix="в&#160;"/>
-        <label variable="number-of-volumes" form="short" prefix="&#160;"/>
-      </else>
-    </choose>
-  </macro>
 
-  <macro name="language-sort"> <!-- Макрос сортировки по полю "Language" (сначала русскоязычные источники, затем иностранные) -->
-    <choose>
-      <if variable="note">
-        <text value="B000"/>
-      </if>
-      <else>
-        <text value="A000"/>
-      </else>
-    </choose>    
-  </macro>
+  <!-- ============================== AUTHORS ============================== -->
 
-<!--_______________________________________________________________________________
-    _____________________________________ АВТОРЫ __________________________________
-    _______________________________________________________________________________ -->
-
-  <macro name="author_short"> <!-- Макрос для ненумерованных ссылок вида [Иванов, 2013] -->
-    <choose>
-      <if type="webpage">
-        <names variable="author">
-          <name form="short" name-as-sort-order="all"  sort-separator="&#160;" delimiter=", " delimiter-precedes-last="always"/>
-          <substitute>
-            <text variable="title"/>
-            <text variable="container-title"/>
-          </substitute>
-        </names>
-      </if>
-      <else>
-        <names variable="author">
-          <name form="short" name-as-sort-order="all" sort-separator="&#160;" delimiter=", " delimiter-precedes-last="always"/>
-          <substitute>
-            <text variable="title"/>
-          </substitute>
-        </names>
-      </else>
-    </choose>
-  </macro>  
-
-  <macro name="author-title">
-    <names variable="author" suffix=". ">
-      <!-- Добавить запятую между фамилией и инициалами автора: sort-separator=",&#160;", иначе sort-separator="&#160;" -->
-      <!-- Сделать шрифт фамилий и инициалов авторов наклонным: font-style="italic", иначе font-style="normal" -->
-      <name et-al-min="2" et-al-use-first="1" initialize-with="." font-style="normal" name-as-sort-order="first" sort-separator="&#160;"/> 
+  <!-- First author: "Гук, М." -->
+  <macro name="primary-author">
+    <names variable="author">
+      <name name-as-sort-order="first"
+            sort-separator=", "
+            initialize="true"
+            initialize-with=". "
+            delimiter=", "
+            delimiter-precedes-last="always"
+            et-al-min="2"
+            et-al-use-first="1"
+            delimiter-precedes-et-al="never"/>
       <et-al term="and others"/>
+      <substitute>
+        <names variable="editor">
+          <name initialize="true" initialize-with=". " delimiter=", "/>
+        </names>
+        <text variable="title"/>
+      </substitute>
     </names>
+  </macro>
+
+  <!-- Authors after slash: "М. О. Кузелин, Д. А. Кнышев, В. Ю. Зотов" -->
+  <macro name="secondary-authors">
+    <names variable="author">
+      <name initialize="true"
+            initialize-with=". "
+            delimiter=", "
+            delimiter-precedes-last="always"
+            et-al-min="4"
+            et-al-use-first="1"
+            delimiter-precedes-et-al="never"/>
+      <et-al term="et-al"/>
+    </names>
+  </macro>
+
+  <!-- Editors when there are no authors: "под ред. В. А. Шахнова" -->
+  <macro name="secondary-editors">
+    <group delimiter=" ">
+      <text value="под ред."/>
+      <names variable="editor">
+        <name initialize="true"
+              initialize-with=". "
+              delimiter=", "
+              delimiter-precedes-last="always"
+              et-al-min="4"
+              et-al-use-first="1"
+              delimiter-precedes-et-al="never"/>
+        <et-al term="et-al"/>
+      </names>
+    </group>
+  </macro>
+
+  <!-- Author before title, or just title when there is no author. -->
+  <macro name="author-title">
+    <choose>
+      <if variable="author">
+        <group delimiter=" ">
+          <text macro="primary-author"/>
+          <text variable="title"/>
+        </group>
+      </if>
+      <else>
+        <text variable="title"/>
+      </else>
+    </choose>
+  </macro>
+
+  <!-- Title first: used for articles/chapters, as in the supplied examples. -->
+  <macro name="title">
     <text variable="title"/>
   </macro>
 
-  <macro name="author-title-medium">
+  <!-- ============================== DESCRIPTION ============================== -->
+
+  <!-- "В 2 т." -->
+  <macro name="number-of-volumes">
     <choose>
-      <if variable="medium">
-        <text macro="author-title" suffix=" [Электронный ресурс]"/>
+      <if variable="number-of-volumes">
+        <group delimiter=" ">
+          <text value="В"/>
+          <text variable="number-of-volumes"/>
+          <text value="т."/>
+        </group>
       </if>
-      <else>
-        <text macro="author-title"/>
-      </else>
-    </choose>  
-  </macro>
- 
-<macro name="second-position-creators">
-<group delimiter="; ">
-<names variable="author collection-editor" delimiter="; ">
-<label form="short" prefix=" " suffix=". " text-case="lowercase" strip-periods="true"/>
-<name et-al-min="4" et-al-use-first="1" delimiter=", " initialize-with="."/>
-</names>
-<names variable="editor translator" delimiter="; ">
-<label form="short" prefix=" " suffix=". " text-case="lowercase" strip-periods="true"/>
-<name et-al-min="4" et-al-use-first="1" delimiter=", " initialize-with="."/>
-</names>
-</group>
-</macro>
-
-  <macro name="second-position-authors-only">
-    <names variable="author">
-      <label form="short" prefix=" " suffix=". " text-case="lowercase" strip-periods="true"/>
-      <name et-al-min="4" et-al-use-first="1" delimiter=", " initialize-with="."/>      
-    </names>
+    </choose>
   </macro>
 
-  <macro name="second-position-creators-no-authors">
-    <names variable="collection-editor editor translator" delimiter="; ">
-      <label form="short" prefix=" " suffix=". " text-case="lowercase" strip-periods="true"/>
-      <name et-al-min="4" et-al-use-first="1" delimiter=", " initialize-with="."/>      
-    </names>
-  </macro>
-  
-  
-
-<!--_______________________________________________________________________________
-    _________________________ ВСПОМОГАТЕЛЬНЫЕ МАКРОСЫ _____________________________
-    _______________________________________________________________________________ -->
-
-  <macro name="citation-number">
-    <text variable="citation-number" prefix="[" suffix="] "/>
+  <!-- "Т. 1" -->
+  <macro name="volume">
+    <choose>
+      <if variable="volume">
+        <group delimiter=" ">
+          <text value="Т."/>
+          <text variable="volume"/>
+        </group>
+      </if>
+    </choose>
   </macro>
 
+  <!-- "№ 12" -->
+  <macro name="issue">
+    <choose>
+      <if variable="issue">
+        <group delimiter="&#160;">
+          <text value="№"/>
+          <text variable="issue"/>
+        </group>
+      </if>
+    </choose>
+  </macro>
+
+  <!-- "С. 21–25" -->
+  <macro name="page">
+    <choose>
+      <if variable="page">
+        <group delimiter="&#160;">
+          <text value="С."/>
+          <text variable="page"/>
+        </group>
+      </if>
+    </choose>
+  </macro>
+
+  <!-- "440 с." -->
+  <macro name="number-of-pages">
+    <choose>
+      <if variable="number-of-pages">
+        <group delimiter="&#160;">
+          <text variable="number-of-pages"/>
+          <text value="с."/>
+        </group>
+      </if>
+    </choose>
+  </macro>
+
+  <!-- "М. : Питер Ком, 1999" -->
   <macro name="publisher">
-    <group prefix=" " delimiter=": " suffix=", ">
-		  <text variable="publisher-place"/>
+    <group delimiter=" : ">
+      <text variable="publisher-place"/>
       <text variable="publisher"/>
     </group>
-    <text macro="year-date" suffix=""/>     
-  </macro>
-
-  <macro name="day-month">
-    <date variable="issued">
-      <date-part name="day" form="numeric" suffix="&#160;"/>
-      <date-part name="month" form="short"/>
-    </date>
-  </macro>
-
-  <macro name="year-date">
-    <date variable="issued">
+    <date variable="issued" prefix=", ">
       <date-part name="year"/>
     </date>
   </macro>
 
-  <macro name="page">
-    <label variable="page" form="short" prefix="" suffix="&#160;" text-case="capitalize-first"/>
-    <text variable="page"/>    
+  <!-- ============================== ELECTRONIC RESOURCES ============================== -->
+
+  <macro name="electronic-mark">
+    <text value="[Электронный ресурс]"/>
   </macro>
 
-  <macro name="number-of-pages">    
-    <text variable="number-of-pages"/>
-    <label variable="number-of-pages" form="short" prefix="&#160;" suffix=""/>
-  </macro>
-
-  <macro name="pages-or-volumes">
+  <macro name="access">
     <choose>
-      <if variable="volume">
-        <text macro="number-of-pages"/>
+      <if variable="URL">
+        <group delimiter=" : ">
+          <text value="Режим доступа"/>
+          <text variable="URL"/>
+        </group>
       </if>
-      <else-if variable="number-of-volumes">
-        <text macro="volumes"/>
-      </else-if>
-      <else>
-        <text macro="number-of-pages"/>        
-      </else>
-    </choose>
-  </macro>
- 
-  <macro name="volume">
-    <choose>
-      <if variable="volume">
-        <label variable="volume" form="short" prefix="" suffix="&#160;" text-case="capitalize-first"/>
-        <text variable="volume"/>
-      </if>      
     </choose>
   </macro>
 
-  <macro name="volumes">
-    <label variable="volume" form="short" suffix="&#160;1-" text-case="capitalize-first"/>
-    <text variable="number-of-volumes"/>
-  </macro>
+  <!-- ============================== CITATION ============================== -->
 
-  <macro name="collection-number"> <!-- Номер выпуска (Вып. N) -->
-    <choose>
-      <if variable="collection-number">
-        <label variable="collection-number" form="short" prefix="" suffix="&#160;" text-case="capitalize-first"/>
-        <text variable="collection-number"/>
-      </if>      
-    </choose>
-  </macro>
-  
-<!--_______________________________________________________________________________
-    ______________________________ ССЫЛКИ В ТЕКСТЕ ________________________________
-    _______________________________________________________________________________ -->
-
-<!-- Формат цитат для ненумерованных ссылок вида [Иванов, 2013] или [Иванов, 2013, с. 55].
-Сортировка библиографии в этом случае должна быть в алфавитном порядке.
-Для включения этого вида форматирования расскомментировать этот блок, закомментировать следующий (для нумерованных ссылок) и изменить, если требуется правило сортировки библиографии.-->
-
-<!--
-  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true" collapse="year" et-al-subsequent-use-first="1" disambiguate-add-names="false" disambiguate-add-givenname="false">
-    <sort>
-      <key macro="language-sort"/>
-      <key macro="author-title"/>
-      <key variable="issued"/>
-    </sort>
-    <layout prefix="[" suffix="]" delimiter="; " page-range-format="">
-      <group delimiter=", ">
-        <text macro="author_short" suffix=""/>
-        <text macro="year-date"/>      
-      </group>
-      <choose>
-        <if variable="locator">
-          <label variable="locator" form="short" prefix=",&#160;" suffix="&#160;"/>
-          <text variable="locator"/>
-        </if>
-      </choose>      
-    </layout>
-  </citation> -->
-
-<!-- Формат цитат для нумерованных ссылок вида [1] или [1, с. 55].
-Сортировка библиографии в этом случае должна быть в алфавитном порядке.
-Для включения этого вида форматирования расскомментировать этот блок, закомментировать следующий (для цитат) и изменить, если требуется правило сортировки библиографии.-->
-
-  <citation et-al-min="4" et-al-use-first="1" collapse="citation-number">
+  <citation collapse="citation-number">
     <sort>
       <key variable="citation-number"/>
     </sort>
-    <layout prefix="[" suffix="]" delimiter="; ">
+    <layout prefix="[" suffix="]" delimiter=", ">
       <text variable="citation-number"/>
       <choose>
         <if variable="locator">
           <label variable="locator" form="short" prefix=",&#160;" suffix="&#160;"/>
           <text variable="locator"/>
-        </if>        
-      </choose>      
-	</layout>
+        </if>
+      </choose>
+    </layout>
   </citation>
 
-<!--_______________________________________________________________________________
-    ________________________________ БИБЛИОГРАФИЯ _________________________________
-    _______________________________________________________________________________ -->
+  <!-- ============================== BIBLIOGRAPHY ============================== -->
 
-  <macro name="bibliography">
-    <text macro="citation-number"/>      
-    <choose>
-<!--_______________________________________________________________________________
-    _______________ КНИГА (в т.ч. многотомник или отдельный том, а также __________
-    Электронный ресурс локального доступа (CD-ROM, компьютерная программа и др.))__
-    _______________________________________________________________________________ -->
-      <if type="book">
-        <group delimiter=". – ">
-          <group delimiter=" / ">
-            <group delimiter=". ">
-              <group delimiter=" : ">
-                <text macro="author-title-medium"/>
-                <text variable="collection-title"/>
-                <text macro="number-of-volumes"/>
-              </group>
-              <text macro="volume"/>
-            </group>  
-            <group delimiter=" ">
-              <text macro="second-position-creators"/>
-              <text variable="note"/>              
-            </group>
-          </group>            
-          <text macro="publisher"/>
-          <text macro="collection-number"/>
-          <text macro="pages-or-volumes"/>
-          <text variable="medium"/>
-        </group>
-      </if>
-<!--_______________________________________________________________________________
-    _________________________ ДИССЕРТАЦИЯ или АВТОРЕФЕРАТ _________________________
-    _______________________________________________________________________________ -->
-      <else-if type="thesis" match="any">
-        <group delimiter=". – " prefix="">
-          <group delimiter=" / ">
-            <group delimiter=" : ">
-              <text macro="author-title"/>
-              <text variable="genre"/>
-            </group>
-            <text macro="second-position-authors-only"/>
-          </group>            
-          <text macro="publisher"/>            
-          <text macro="number-of-pages"/>
-        </group>
-      </else-if>
-<!--_______________________________________________________________________________
-    ___________ РАЗДЕЛ КНИГИ, СТАТЬЯ В СБОРНИКЕ, СТАТЬЯ В ЭНЦИКЛОПЕДИИ ____________
-    _______________________________________________________________________________ -->
-      <else-if type="chapter paper-conference entry-encyclopedia" match="any">
-        <group delimiter=". – ">
-          <group delimiter=" // ">
-            <group delimiter=" / ">
-              <text macro="author-title"/>
-              <text macro="second-position-authors-only"/>
-            </group>
-            <group delimiter=" / ">
-              <group delimiter=" : ">
-                <text variable="container-title"/>
-                <text variable="collection-title"/>
-                <text macro="number-of-volumes"/>
-              </group>
-              <group delimiter=" ">                
-                <text macro="second-position-creators-no-authors"/>
-                <text variable="note"/>
-              </group>              
-            </group>                
-          </group>
-          <text macro="publisher"/>
-          <text macro="volume"/>
-          <text macro="collection-number"/>
-          <text variable="title-short"/>
-          <text macro="page"/>
-        </group>
-      </else-if>
-<!--_______________________________________________________________________________
-    _________________________ СТАТЬЯ В ПЕРИОДИКЕ, ЖУРНАЛЕ _________________________
-    _______________________________________________________________________________ -->
-      <else-if type="article-journal article-magazine" match="any">        
-        <group delimiter=". – ">
-          <group delimiter=" // ">
-            <group delimiter=" / ">
-              <group delimiter=" : ">
-                <text macro="author-title"/>
-                <text variable="collection-title"/>                
-              </group>              
-              <text macro="second-position-authors-only"/>
-            </group>
-            <text variable="container-title"/>            
-          </group>
-          <text macro="year-date"/>          
-          <text macro="volume"/>          
-          <text variable="title-short"/>
-          <text variable="issue" prefix="№&#160;"/>
-          <text macro="page"/>
-        </group>
-      </else-if>
-<!--_______________________________________________________________________________
-    ______________________________ СТАТЬЯ В ГАЗЕТЕ ________________________________
-    _______________________________________________________________________________ -->
-      <else-if type="article-newspaper">        
-        <group delimiter=". – ">
-          <group delimiter=" // ">
-            <group delimiter=" / ">
-              <group delimiter=" : ">
-                <text macro="author-title"/>
-                <text variable="section"/>                
-              </group>              
-              <text macro="second-position-authors-only"/>
-            </group>
-            <text variable="container-title"/>            
-          </group>
-          <text macro="year-date"/>                  
-          <text macro="day-month"/>          
-          <text macro="page"/>
-        </group>
-      </else-if>
-<!--_______________________________________________________________________________
-    ___________ ЭЛЕКТРОННЫЙ РЕСУРС УДАЛЕННОГО ДОСТУПА (ВЕБ-СТРАНИЦА)_______________
-    _______________________________________________________________________________ -->
-      <else-if type="webpage">
-        <group delimiter=". – " prefix="">
-          <group delimiter=" / ">
-            <group delimiter=" : ">
-              <text macro="author-title" suffix=" [Электронный ресурс]"/>
-              <text variable="genre"/>
-            </group>
-            <group delimiter=" ">
-              <text macro="second-position-authors-only"/>
-              <text variable="note"/>
-            </group>            
-          </group>            
-          <text variable="URL" prefix="URL: "/>
-          <text variable="accessed" prefix="(дата обращения:" suffix=")"/>
-              <date variable="accessed">
-                <date-part name="day" suffix="." form="numeric-leading-zeros"/>
-                <date-part name="month" suffix="." form="numeric-leading-zeros"/>
-                <date-part name="year"/>
-              </date>
-        </group>
-      </else-if>
-<!--_______________________________________________________________________________
-    _____________________________ Другие типы источников __________________________
-    _______________________________________________________________________________ -->
-      <else>        
-        <group delimiter=". – ">
-          <group delimiter=" / ">
-            <group delimiter=". ">
-              <group delimiter=" : ">
-                <text macro="author-title"/>
-                <text variable="collection-title"/>
-                <text macro="number-of-volumes"/>
-              </group>
-              <text macro="volume"/>
-              <text variable="title-short"/>
-            </group>  
-            <group delimiter=" ">
-              <text macro="second-position-creators"/>
-              <text variable="note"/>               
-            </group>
-          </group>            
-          <text macro="publisher"/>
-          <text macro="collection-number"/>
-          <text macro="pages-or-volumes"/>
-        </group>
-      </else>
+  <bibliography et-al-min="4"
+                et-al-use-first="1"
+                delimiter-precedes-et-al="never">
 
-    </choose>
-  </macro>
-
-<!--_______________________________________________________________________________
-    _________ Непосредтсвенно БИБЛИОГРАФИЯ с сортировкой и локализацией ___________
-    _______________________________________________________________________________ -->
-
-  <bibliography et-al-min="4" et-al-use-first="1">  
+    <!-- References are numbered in order of appearance: [1], [2], ... -->
     <sort>
-      <!-- Строка для сортировки в порядке появления ссылок, а не в алфавитном. Чтобы задействовать, нужно ее раскомментировать, а следующие три закомментировать-->
       <key variable="citation-number"/>
-
-<!-- Сортировка по полю "Language" (сначала русскоязычные источники, затем иностранные) -->
-      <!-- <key macro="language-sort"/>   -->
-      <!-- <key macro="author-title"/> -->
-      <!-- <key variable="issued"/> -->
     </sort>
 
     <layout suffix=".">
-      <text macro="bibliography"/>
+      <text variable="citation-number" prefix="[" suffix="] "/>
+
+      <choose>
+
+        <!-- ============================== BOOK ============================== -->
+        <if type="book">
+
+          <group delimiter=". – ">
+
+            <!-- Title / authors -->
+            <group delimiter=" / ">
+              <group delimiter=". ">
+
+                <!-- Author + title -->
+                <group delimiter=" : ">
+                  <text macro="author-title"/>
+                  <text variable="genre"/>
+                </group>
+
+                <!-- "В 2 т." -->
+                <text macro="number-of-volumes"/>
+
+              </group>
+
+              <!-- All authors after slash; if absent, editors -->
+              <choose>
+                <if variable="author">
+                  <text macro="secondary-authors"/>
+                </if>
+                <else-if variable="editor">
+                  <text macro="secondary-editors"/>
+                </else-if>
+              </choose>
+            </group>
+
+            <!-- Publisher -->
+            <text macro="publisher"/>
+
+            <!-- Volume of a multivolume edition -->
+            <text macro="volume"/>
+
+            <!-- Number of pages -->
+            <text macro="number-of-pages"/>
+
+            <!-- Medium, e.g. CD-ROM -->
+            <text variable="medium"/>
+
+          </group>
+
+        </if>
+
+        <!-- ============================== THESIS ============================== -->
+        <else-if type="thesis">
+
+          <group delimiter=". – ">
+            <group delimiter=" / ">
+              <group delimiter=" : ">
+                <text macro="author-title"/>
+                <text variable="genre"/>
+              </group>
+              <text macro="secondary-authors"/>
+            </group>
+            <text macro="publisher"/>
+            <text macro="number-of-pages"/>
+          </group>
+
+        </else-if>
+
+        <!-- ============================== CHAPTER / CONFERENCE ============================== -->
+        <else-if type="chapter paper-conference entry-encyclopedia" match="any">
+
+          <group delimiter=". – ">
+
+            <group delimiter=" // ">
+
+              <!-- "Название / Автор" -->
+              <group delimiter=" / ">
+                <text macro="title"/>
+                <choose>
+                  <if variable="author">
+                    <text macro="secondary-authors"/>
+                  </if>
+                  <else-if variable="editor">
+                    <text macro="secondary-editors"/>
+                  </else-if>
+                </choose>
+              </group>
+
+              <!-- Container title -->
+              <text variable="container-title"/>
+
+            </group>
+
+            <text macro="publisher"/>
+            <text macro="volume"/>
+            <text macro="issue"/>
+            <text macro="page"/>
+
+          </group>
+
+        </else-if>
+
+        <!-- ============================== JOURNAL ARTICLE ============================== -->
+        <else-if type="article-journal article-magazine" match="any">
+
+          <group delimiter=". – ">
+
+            <group delimiter=" // ">
+
+              <group delimiter=" / ">
+                <text macro="title"/>
+                <choose>
+                  <if variable="author">
+                    <text macro="secondary-authors"/>
+                  </if>
+                  <else-if variable="editor">
+                    <text macro="secondary-editors"/>
+                  </else-if>
+                </choose>
+              </group>
+
+              <text variable="container-title"/>
+
+            </group>
+
+            <date variable="issued">
+              <date-part name="year"/>
+            </date>
+
+            <text macro="volume"/>
+            <text macro="issue"/>
+            <text macro="page"/>
+
+          </group>
+
+        </else-if>
+
+        <!-- ============================== NEWSPAPER ============================== -->
+        <else-if type="article-newspaper">
+
+          <group delimiter=". – ">
+
+            <group delimiter=" // ">
+              <group delimiter=" / ">
+                <text macro="title"/>
+                <text macro="secondary-authors"/>
+              </group>
+              <text variable="container-title"/>
+            </group>
+
+            <date variable="issued">
+              <date-part name="year"/>
+            </date>
+
+            <text macro="page"/>
+
+          </group>
+
+        </else-if>
+
+        <!-- ============================== WEB PAGE ============================== -->
+        <else-if type="webpage">
+
+          <group delimiter=". – ">
+
+            <group delimiter=" ">
+              <group delimiter=" / ">
+                <text variable="title"/>
+                <choose>
+                  <if variable="author">
+                    <text macro="secondary-authors"/>
+                  </if>
+                </choose>
+              </group>
+              <text macro="electronic-mark"/>
+            </group>
+
+            <text macro="access"/>
+
+          </group>
+
+        </else-if>
+
+        <!-- ============================== OTHER ELECTRONIC RESOURCE ============================== -->
+        <else-if variable="URL">
+
+          <group delimiter=". – ">
+
+            <group delimiter=" ">
+              <group delimiter=" / ">
+                <text macro="title"/>
+                <choose>
+                  <if variable="author">
+                    <text macro="secondary-authors"/>
+                  </if>
+                  <else-if variable="editor">
+                    <text macro="secondary-editors"/>
+                  </else-if>
+                </choose>
+              </group>
+              <text macro="electronic-mark"/>
+            </group>
+
+            <text macro="access"/>
+
+          </group>
+
+        </else-if>
+
+        <!-- ============================== OTHER ============================== -->
+        <else>
+
+          <group delimiter=". – ">
+
+            <group delimiter=" / ">
+              <group delimiter=". ">
+                <group delimiter=" : ">
+                  <text macro="author-title"/>
+                  <text variable="genre"/>
+                </group>
+                <text macro="number-of-volumes"/>
+                <text macro="volume"/>
+              </group>
+
+              <choose>
+                <if variable="author">
+                  <text macro="secondary-authors"/>
+                </if>
+                <else-if variable="editor">
+                  <text macro="secondary-editors"/>
+                </else-if>
+              </choose>
+            </group>
+
+            <text macro="publisher"/>
+            <text macro="number-of-pages"/>
+
+          </group>
+
+        </else>
+
+      </choose>
     </layout>
-    
   </bibliography>
+
 </style>
