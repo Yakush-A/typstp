@@ -11,6 +11,7 @@
   table(
     columns: 4,
     table.header(
+      level: 1,
       [], [Blue chip],
       [Fresh IPO], [Penny st'k],
     ),

@@ -117,6 +117,8 @@
 }
 
 
+#let table-headers-counter = counter("table-headers")
+
 
 
 // функция листинга файла
@@ -502,61 +504,111 @@
 
   // добавление к таблице номера в специальном формате
   #show figure.where(kind: table): it => {
+    v(1.0em, weak: true)
 
-    v(1.0em + right-leadind, weak: true)
+    // обнуление счетчика шапок таблиц
+    table-headers-counter.update(0)
 
 
-    // изменение описания на свое
-    show figure.caption: caption => {
 
-      // grid из двух клеток: одна содержит "Таблица 1.1 -- ", 
-      // вторая само название таблицы
+    // разная нумерация в разделах и приложениях
+    // 
+    // впринципе, такое уже было в рисунках, еще
+    // раз пояснять смысла не вижу
+    let table-numbering = [
+      #if attachment-counter.get().first() == 0 {
+        context counter(figure.where(kind: table)).display()
+      } else {
+        context attachment-letters.at(attachment-counter.get().first() - 1)
+        [.]
+        context counter(figure.where(kind: table)).get().first()
+      }
+    ]
+
+    // Название таблицы (Таблица X -- название)
+    //
+    // TODO: сделать чтобы название таблицы 
+    // не вылазило за пределы таблицы
+    show figure.caption: cap => {
+      // grid т.к. название д.б. выравнено по левому краю
+      // независимо от номера таблицы
       grid(
         columns: (auto, auto),
         column-gutter: 0.3em,
 
-        // разная нумерация в разделах и приложениях
-        // 
-        // впринципе, такое уже было в рисунках, еще
-        // раз пояснять смысла не вижу
-        //
-        // TODO: сделать чтобы описание таблицы не выходило 
-        // за ее рамки (мб сделать название чисто как в ворде
-        // строку таблицы добавить сверху невидимую :) )
-        if attachment-counter.get().first() == 0 {
-          box({
-            caption.supplement
-            [ ]
-            context counter(figure.where(kind: table)).display()
-            caption.separator
-          })
-        } else {
-          box({
-            caption.supplement
-            [ ]
-            context attachment-letters.at(
-              attachment-counter.get().first() - 1
-            )
-            [.]
-            context counter(figure.where(kind: table)).get().first()
-            caption.separator
-          })
-
-        },
-
-        // текст описания таблицы
-        caption.body
+        // Таблица и ее номер
+        box({
+          cap.supplement
+          [ ]
+          table-numbering
+          cap.separator
+        }),
+        
+        // собственно текст названия таблицы
+        align(left)[ 
+          #cap.body
+        ]
       )
-    }
-      
-    it
-    v(1.0em, weak: true)
+    } 
 
+    // отключение абзацных отступов для названия таблицы
+    set par(first-line-indent: 0pt)
+
+    // создание новой таблицы со спец. header'ом
+    table(
+      fill: none,
+      inset: 0pt,
+      stroke: 0pt,
+
+
+
+      // Просто заберите у меня typst, это закончится плохо
+      //
+      // Т.к. хедер у таблицы просчитывается только при создании,
+      // разные хедеры в начале таблицы и в ее продолжении сделать
+      // нельзя. По-факту мы сейчас делаем так, чтобы у таблицы 
+      // сверху хедера на ее продолжении писалось "Продолжение таблицы X".
+      // Я это делаю через счетчик со своим .display() 
+      table.header(
+        [
+          // при создании этого хедера увеличиваем счетчик:
+          // 1 = первый хедер => начало таблицы
+          // 2 => продолжение
+          #context table-headers-counter.step()
+
+          // вот тут я не понимаю, почему оно не работает, 
+          // если это убрать
+          // TODO: исправить это недоразумение
+          #if table-headers-counter.get().first() == 1 {
+            [
+              // довавление текста "Продолжение таблицы X"
+              #context table-headers-counter.display((..nums) => {
+                if table-headers-counter.get().first() > 1 {
+                  align(left)[Продолжение таблицы #table-numbering]
+                  v(right-leadind)
+                }
+              })
+            ]
+          }
+        ],
+        // TODO: сделать чтобы можно было добавить повторяющийся
+        // хедер с нумерованными столбцами, а не только текстом
+      ),
+
+
+      // отступ, т.к. таблица не текст, поэтому тут надо 
+      // добавить leading (?)
+      v(right-leadind),
+
+      // оставляем старый хедер
+      it
+    )
+    
+    // просто отступ 
+    v(1.0em, weak: true)
   }
 
   // делает таблицу разрываемой
-  //
-  // TODO: сделать добавление "Продолжение таблицы" после разрыва
   #show figure.where(kind: table): set block(breakable: true)
 
   // Просто ширина линий
