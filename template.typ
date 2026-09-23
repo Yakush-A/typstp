@@ -84,6 +84,8 @@
 
   // Добавление подписи типа приложения и его названия 
   align(center)[ (#type) \ * #name * ]
+
+  v(1.0em, weak: true)
 }
 
 
@@ -124,12 +126,14 @@
 // функция листинга файла
 #let source-text(path, name) = {
   // чтение содержимого файла 
-  let file-content = read(path) 
+  let file-content = read(path)
+    // обрезка переносов строк в файле 
+    .trim(at: end, "\n")
+    .trim(at: start, "\n")
 
   [
     // отображаемое название файла
     #text(weight: "bold")[
-      #v(1.0em, weak: true)
       #name
     ]
     // исходный текст файла

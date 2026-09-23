@@ -18,6 +18,15 @@
   "обязательное",
   "Листинг кода"
 )
+
+#source-text(
+  "README.md",
+  "README",
+)
+#source-text(
+  "test/attachment.typ",
+  "attachment.typ",
+)
 #source-text(
   "main.typ",
   "main.typ",
