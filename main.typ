@@ -4,7 +4,7 @@
 
 #outline()
 
-#include "test/example.typ"
+#include "document/example.typ"
 
 #bibliography("sources.bib")
 
@@ -12,7 +12,7 @@
   "обязательное",
   "Секретный DeepSeek API"
 )
-#include "test/attachment.typ"
+#include "document/attachment.typ"
 
 #attachment(
   "обязательное",
@@ -24,7 +24,7 @@
   "README",
 )
 #source-text(
-  "test/attachment.typ",
+  "document/attachment.typ",
   "attachment.typ",
 )
 #source-text(
@@ -36,11 +36,11 @@
   "рекомендуемое",
   "Самый секретный DeepSeek API"
 )
-#include "test/attachment.typ"
+#include "document/attachment.typ"
 
 #attachment(
   "справочное",
   "Наиболее секретный DeepSeek API, никто вообще не в курсе, что это"
 )
-#include "test/attachment.typ"
+#include "document/attachment.typ"
 
