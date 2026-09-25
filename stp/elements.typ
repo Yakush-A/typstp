@@ -84,23 +84,20 @@
 
   // по-дефолту будет нумерация просто 1, 2 и т.д.
   #set enum(
-    numbering: "1",
+    numbering: default-enum-numbering,
     full: true,
   )
 
-  // TODO: 
-  // сделать для автоматической нумерации
-  #show enum.item: it => {
-    if enum.numbering == "1" {
-      str(it.number)
-      [ ] 
-      it.body
-      parbreak()
-    } else {
-      it
+  #show enum.where(numbering: default-enum-numbering): it => {
+    let enumerated-enum = it.children.enumerate(start: 1)
+
+    for (number, item) in enumerated-enum {
+      par[#str(number) #item.body]
     }
   }
 
+  // TODO: двухуровневая нумерация для перечислений
+  // с ссылками на его элементы
 
 
 
@@ -540,11 +537,23 @@
   #set math.equation(
     // нумерация вида (1.1) из 2.4.6
     numbering: (..nums) => {
-      numbering(
-        "(1.1)",
-        counter(heading).get().first(),
-        nums.pos().first(),
-      )
+      if attachment-counter.get().first() < 1 {
+        numbering(
+          "(1.1)",
+          counter(heading).get().first(),
+          nums.pos().first(),
+        )
+        // в очередной раз нумерация под
+        // приложения бла-бла-бла
+      } else {
+        [(]
+        attachment-letters.at(
+          attachment-counter.get().first() - 1
+        )
+        [.]
+        str(nums.pos().first())
+        [)]
+      }
     },
     // установка номера в правый нижний угол
     // чтобы на многострочных формулах он стоял

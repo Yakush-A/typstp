@@ -60,6 +60,16 @@
   // добавление скобочки после буквы/числa
 }
 
+// 
+#let default-enum-numbering(..nums) = {
+  let nums = nums.pos()
+  let n = nums.last()
+
+  if nums.len() == 1 {
+    h(1.25cm, weak: false)
+    str(n)
+  }
+}
 
 // Приложения 
 

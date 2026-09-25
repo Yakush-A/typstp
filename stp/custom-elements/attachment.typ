@@ -8,6 +8,7 @@
   // сброс счетчиков для рисунков, таблиц в приложениях
   counter(figure.where(kind: image)).update(0)
   counter(figure.where(kind: table)).update(0)
+  counter(math.equation).update(0)
 
 
   // Полу-костыль, чтобы название приложения 
