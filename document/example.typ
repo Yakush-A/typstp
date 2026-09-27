@@ -142,15 +142,17 @@ Deepseek V4 Flash тоже неплох, но он не такой секрет�
   Ненумерованный раздел
 ]
 #lorem(100)
-#parbreak()
+
 #lorem(50)
-#parbreak()
-#lorem(140)
-#parbreak()
+
+#lorem(120)
+
+$ "Lu" = "nyashka" $
+
 #lorem(100)
-#parbreak()
+
 #lorem(20)
-#parbreak()
+
 
 
 

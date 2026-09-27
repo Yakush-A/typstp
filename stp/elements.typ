@@ -141,6 +141,7 @@
     // сброс нумераций для рисунков, таблиц в разделе
     counter(figure.where(kind: image)).update(0)
     counter(figure.where(kind: table)).update(0)
+    counter(math.equation).update(0)
 
     // добавление разрыва страницы (2.2.6) 
     // 
