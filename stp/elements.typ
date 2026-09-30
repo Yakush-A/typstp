@@ -1,7 +1,6 @@
 #import "constants.typ" : *
 
 #let template(body) = [
-
   // Общие настройки шрифта из 2.1.1
   #set text(
     font: main-font,
@@ -89,7 +88,15 @@
   )
 
   #show enum.where(numbering: default-enum-numbering): it => {
-    let enumerated-enum = it.children.enumerate(start: 1)
+    let start = 1
+
+    // установка начального значения при задании
+    // номера первого элемента
+    if it.children.first().number != auto {
+      start = it.children.first().number
+    }
+
+    let enumerated-enum = it.children.enumerate(start: start)
 
     for (number, item) in enumerated-enum {
       par[#str(number) #item.body]
