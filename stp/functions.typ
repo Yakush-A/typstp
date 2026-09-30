@@ -14,15 +14,9 @@
 
   [
     // отображаемое название файла
-    #text(weight: "bold")[
+    #text[
       #name
     ]
-
-    // момент странный, но вроде как
-    // тут отступа не должно быть
-    // 
-    // (я не нашел, где это указано в СТП)
-    #v(-1.0em)
 
     // исходный текст файла
     #raw(
@@ -31,4 +25,23 @@
     )
   ]
 }
+
+#let introduction = {
+  heading(numbering: none)[
+    Введение
+  ]
+}
+
+#let abstract = {
+  heading(numbering: none)[
+    Реферат
+  ]
+}
+
+#let conclusion = {
+  heading(numbering: none)[
+    Заключение
+  ]
+}
+
 
