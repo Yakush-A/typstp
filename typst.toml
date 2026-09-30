@@ -1,0 +1,13 @@
+[package]
+name = "typstp"
+version = "0.1.0"
+entrypoint = "lib.typ"
+
+repository = "https://github.com/Yakush-A/typstp"
+keywords = ["bsuir", "uni", "stp", "gost"]
+categories = ["report"]
+
+[template]
+path = "template"
+entrypoint = "main.typ"
+

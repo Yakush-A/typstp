@@ -18,3 +18,43 @@
 ## Нерешенные проблемы с typst:
 - Невозможность добавить в библиографический указатель абазацные отступы для источников
 
+## Локальная установка
+
+Создайте локальный package repository:
+
+```bash
+mkdir -p packages/local/typstp
+```
+
+Создайте символическую ссылку на каталог пакета:
+
+```bash
+ln -s /path/to/typstp packages/local/typstp/0.1.0
+```
+
+После этого пакет можно импортировать с помощью:
+
+```typst
+#import "@local/typstp:0.1.0": *
+```
+
+При компиляции укажите созданный package repository:
+
+```bash
+typst compile --package-path ./packages test.typ
+```
+
+Также можно добавить пакет в:
+
+```bash
+mkdir -p ~/.local/share/typst/packages/local/typstp/
+```
+
+и 
+
+```bash
+ln -s /path/to/typstp ~/.local/share/typst/packages/local/typstp/0.1.0
+```
+
+В таком случае указывать репозиторий при компиляции не требуется -- он находится сам.
+ 

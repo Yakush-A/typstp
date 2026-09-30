@@ -1,4 +1,4 @@
-#import "../template.typ": *
+#import "@local/typstp:0.1.0": *
 
 // кроме "Введения" есть еще 
 // #abstract -- реферат

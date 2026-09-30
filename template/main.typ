@@ -1,4 +1,4 @@
-#import "template.typ": *
+#import "@local/typstp:0.1.0": *
 
 #show: template
 
@@ -20,7 +20,7 @@
 )
 
 #source-text(
-  "README.md",
+  "../README.md",
   "README",
 )
 #source-text(
