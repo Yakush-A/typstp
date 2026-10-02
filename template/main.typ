@@ -1,4 +1,4 @@
-#import "@local/typstp:0.1.0": *
+#import "@local/stp:0.1.0": *
 
 #show: template
 
