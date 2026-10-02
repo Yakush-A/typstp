@@ -23,13 +23,13 @@
 Создайте локальный package repository:
 
 ```bash
-mkdir -p packages/local/typstp
+mkdir -p packages/local/stp
 ```
 
 Создайте символическую ссылку на каталог пакета:
 
 ```bash
-ln -s /path/to/typstp packages/local/typstp/0.1.0
+ln -s /path/to/typstp packages/local/stp/0.1.0
 ```
 
 После этого пакет можно импортировать с помощью:
@@ -47,13 +47,13 @@ typst compile --package-path ./packages test.typ
 Также можно добавить пакет в:
 
 ```bash
-mkdir -p ~/.local/share/typst/packages/local/typstp/
+mkdir -p ~/.local/share/typst/packages/local/stp/
 ```
 
 и 
 
 ```bash
-ln -s /path/to/typstp ~/.local/share/typst/packages/local/typstp/0.1.0
+ln -s /path/to/typstp ~/.local/share/typst/packages/local/stp/0.1.0
 ```
 
 В таком случае указывать репозиторий при компиляции не требуется -- он находится сам.
