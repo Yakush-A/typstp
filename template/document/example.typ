@@ -1,4 +1,4 @@
-#import "@local/stp:0.1.0": *
+#import "@preview/stp:0.1.1": *
 
 // кроме "Введения" есть еще 
 // #abstract -- реферат
@@ -33,7 +33,7 @@
   caption: [Секретный deepseek API],
   image(
     "секретный-deepseek-API.png",
-    width: 150mm,
+    width: 94%,
   )
 )
 
@@ -134,6 +134,9 @@ Deepseek V4 Flash тоже неплох, но он не такой секрет�
     table.header(
       [Hi], [Helo], [Секретный DeepSeek API]
     ),
+    [a], [b], [c],
+    [a], [b], [c],
+    [a], [b], [c],
     [a], [b], [c],
     [a], [b], [c],
     [a], [b], [c],

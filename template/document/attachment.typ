@@ -12,7 +12,7 @@
 #figure(
   caption: [Рандомная таблица из документации],
   table(
-    columns: 4,
+    columns: (auto, 1fr, 1fr, 1fr),
     table.header(
       level: 1,
       [], [Blue chip],

@@ -1,4 +1,4 @@
-#import "@local/stp:0.1.0": *
+#import "@preview/stp:0.1.1": *
 
 #show: template
 
@@ -14,23 +14,25 @@
 )
 #include "document/attachment.typ"
 
-#attachment(
-  "обязательное",
-  "Листинг кода"
-)
+// Пока что не работает
 
-#source-text(
-  "../README.md",
-  "README",
-)
-#source-text(
-  "document/attachment.typ",
-  "attachment.typ",
-)
-#source-text(
-  "main.typ",
-  "main.typ",
-)
+// #attachment(
+//   "обязательное",
+//   "Листинг кода"
+// )
+//
+// #source-text(
+//   "../README.md",
+//   "README",
+// )
+// #source-text(
+//   "document/attachment.typ",
+//   "attachment.typ",
+// )
+// #source-text(
+//   "main.typ",
+//   "main.typ",
+// )
 
 #attachment(
   "рекомендуемое",
