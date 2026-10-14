@@ -440,16 +440,13 @@
           // вот тут я не понимаю, почему оно не работает, 
           // если это убрать
           // TODO: исправить это недоразумение
-          #if table-headers-counter.get().first() == 1 {
-            [
-              // довавление текста "Продолжение таблицы X"
-              #context table-headers-counter.display((..nums) => {
-                if table-headers-counter.get().first() > 1 {
-                  align(left)[Продолжение таблицы #table-numbering]
-                  v(right-leadind)
-                }
-              })
-            ]
+          #context {
+            if table-headers-counter.get().first() > 1 {
+              align(left)[
+                Продолжение таблицы #table-numbering
+              ]
+              v(right-leadind)
+            }
           }
         ],
         // TODO: сделать чтобы можно было добавить повторяющийся
