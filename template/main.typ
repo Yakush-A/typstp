@@ -1,4 +1,4 @@
-#import "@preview/stp:0.1.1": *
+#import "@preview/typo-stp:0.1.1": *
 
 #show: template
 
@@ -8,41 +8,41 @@
 
 #bibliography("sources.bib")
 
-#attachment(
+#appendix(
   "обязательное",
   "Секретный DeepSeek API"
 )
-#include "document/attachment.typ"
+#include "document/appendix.typ"
 
 // Пока что не работает
 
-// #attachment(
-//   "обязательное",
-//   "Листинг кода"
-// )
-//
+#appendix(
+  "обязательное",
+  "Листинг кода"
+)
+
+#source-text(
+  "../README.md",
+  "README",
+)
 // #source-text(
-//   "../README.md",
-//   "README",
-// )
-// #source-text(
-//   "document/attachment.typ",
-//   "attachment.typ",
+//   "document/appendix.typ",
+//   "appendix.typ",
 // )
 // #source-text(
 //   "main.typ",
 //   "main.typ",
 // )
 
-#attachment(
+#appendix(
   "рекомендуемое",
   "Самый секретный DeepSeek API"
 )
-#include "document/attachment.typ"
+#include "document/appendix.typ"
 
-#attachment(
+#appendix(
   "справочное",
   "Наиболее секретный DeepSeek API, никто вообще не в курсе, что это"
 )
-#include "document/attachment.typ"
+#include "document/appendix.typ"
 

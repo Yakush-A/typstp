@@ -47,9 +47,9 @@
 }
 
 // функция создания приложения
-#let attachment(type, name) = {
+#let appendix(type, name) = {
   // увеличение счетчика приложений (номер в массиве с буквами)
-  attachment-counter.step()
+  appendix-counter.step()
 
   // сброс счетчиков для рисунков, таблиц в приложениях
   counter(figure.where(kind: image)).update(0)
@@ -62,7 +62,7 @@
   show heading: it => {
     align(center)[
       #pagebreak()
-      ПРИЛОЖЕНИЕ #context attachment-letters.at(attachment-counter.get().first() - 1)
+      ПРИЛОЖЕНИЕ #context appendix-letters.at(appendix-counter.get().first() - 1)
     ]
   }
 
@@ -70,7 +70,7 @@
   // но со специальной нумерацией вида "Приложение Я".
   // Да, именно со всем словом "Приложение"
   heading(
-    numbering: attachment-numbering,
+    numbering: appendix-numbering,
   )[(#type) #name]
 
   // Добавление подписи типа приложения и его названия 

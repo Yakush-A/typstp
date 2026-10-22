@@ -17,6 +17,10 @@
 // разницу между межстрочным интервалом и высотой шрифта
 #let right-leadind = line-height - font-size
 
+// Отступ названия таблицы от верхней ячейки
+// (чуть-чуть костыль)
+#let table-caption-indent = 1pt
+
 
 // функция проверки заголовка на отсутствие текста
 #let is-heading-empty(h) = {
@@ -30,7 +34,7 @@
 }
 
 // просто буквы кириллического алфавита для перечислений
-#let cyr-letters = "абвгдеёжзиклмнопрстуфхцчшщъыьэюя".clusters()
+#let cyr-letters = "абвгдежиклмнпрстуфхцчшщэюя".clusters()
 
 // специальная нумерация для 2.3.8
 // Почему в typst нет стандартной нумерации
@@ -74,24 +78,22 @@
 // Приложения 
 
 // счетчик приложений
-#let attachment-counter = counter("attachment")
+#let appendix-counter = counter("appendix")
 
 // буквы, доступные для приложений 
 // (ну за исключением тех, что в п. 2.7.2)
-#let attachment-letters = "АБВГДЕЖИКЛМНПРСТУФХЦШЩЭЮЯ".clusters()
+#let appendix-letters = "АБВГДЕЖИКЛМНПРСТУФХЦШЩЭЮЯ".clusters()
 
 
 // специальная нумерация для приложений
 // (объяснено в создании приложения)
-#let attachment-numbering = (..nums) => {
+#let appendix-numbering = (..nums) => {
   // получение буквы из массива по счетчику
-  let letter = attachment-letters.at(
-    attachment-counter.get().first() - 1
+  let letter = appendix-letters.at(
+    appendix-counter.get().first() - 1
   )
   // добавление слова "Приложение"
-  [
-    Приложение
-  ]
+  [Приложение ]
   // добавление полученной буквы 
   letter
 }

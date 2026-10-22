@@ -5,8 +5,10 @@
   #set text(
     font: main-font,
     size: font-size,
-    top-edge: 1em,      // установка top-edge и bottom-edge 
-    bottom-edge: 0em,   // чтобы правильно работал leading
+
+    // На... ~кхм~ зачем делать стандарты только под микрослоп ворд...
+    top-edge: 1em,       // установка top-edge и bottom-edge 
+    bottom-edge: 0em,    // чтобы правильно работал leading
 
     hyphenate: true,    // переносы
 
@@ -131,11 +133,11 @@
 
   // добавление к заголовкам пробельной строки
   #show heading: it => {
-    v(1.0em, weak: true)      // перед всеми заголовками 1 пробельная строка
+    v(line-height + right-leadind, weak: true)      // перед всеми заголовками 1 пробельная строка
 
     // не добавлять абзацный отступ к заголовкам,
     // которые располагаются по-центру
-    if it.numbering != none and it.numbering != attachment-numbering {
+    if it.numbering != none and it.numbering != appendix-numbering {
       pad(left: 1.25cm, it)   // абзацный отступ для нумерованных разделов
 
     } else {                  // для ненумерованных разделов он не нужен
@@ -143,7 +145,7 @@
     }
 
     if it.level < 3 {
-      v(1.0em, weak: true)    // только после названий разделов, подразделов
+      v(line-height + right-leadind, weak: true)    // только после названий разделов, подразделов
     }
   } 
 
@@ -214,7 +216,7 @@
     // если пуст - заголовка нет => номер пункта
     if is-heading-empty(it) {
       parbreak()
-      v(1.0em, weak: true)            // почему-то этот отступ убрался (?)
+      v(line-height + right-leadind, weak: true)            // почему-то этот отступ убрался (?)
 
       counter(heading).display()
       [ ]
@@ -244,7 +246,7 @@
       
       // оформление загловка пункта
       parbreak()
-      v(1.0em, weak: true)
+      v(line-height + right-leadind, weak: true)
       counter(heading).display()
       [ ]
 
@@ -311,7 +313,7 @@
 
       // если на данный момент нет приложений 
       // (т.е. фигура в обычном разделе)
-      if attachment-counter.get().first() == 0 {
+      if appendix-counter.get().first() == 0 {
         numbering(
           "1.1",
           counter(heading).get().first(),
@@ -322,8 +324,8 @@
       // (т.е. фигура в приложении т.к.
       // откуда взяться разделу после приложения)
       } else {
-        attachment-letters.at( 
-          attachment-counter.get().first() -1
+        appendix-letters.at( 
+          appendix-counter.get().first() -1
         )
         [.]
         str(n)
@@ -347,9 +349,9 @@
   // добавление отступов перед рисунком и после подписи
   #show figure.where(kind: image): it => {
 
-    v(1.0em + right-leadind, weak: true)
+    v(line-height + right-leadind, weak: true)
     it
-    v(1.0em, weak: true)
+    v(line-height + right-leadind, weak: true)
 
   }
 
@@ -360,12 +362,12 @@
   #show figure.caption.where(kind: table): set align(left)
   #show figure.where(kind: table): set figure(
     supplement: "Таблица",
-    gap: right-leadind,
+    gap: table-caption-indent,
   )
 
   // добавление к таблице номера в специальном формате
   #show figure.where(kind: table): it => {
-    v(1.0em, weak: true)
+    v(1.0em + right-leadind, weak: true)
 
     // обнуление счетчика шапок таблиц
     table-headers-counter.update(0)
@@ -377,10 +379,10 @@
     // впринципе, такое уже было в рисунках, еще
     // раз пояснять смысла не вижу
     let table-numbering = [
-      #if attachment-counter.get().first() == 0 {
+      #if appendix-counter.get().first() == 0 {
         context counter(figure.where(kind: table)).display()
       } else {
-        context attachment-letters.at(attachment-counter.get().first() - 1)
+        context appendix-letters.at(appendix-counter.get().first() - 1)
         [.]
         context counter(figure.where(kind: table)).get().first()
       }
@@ -437,14 +439,10 @@
           // 2 => продолжение
           #context table-headers-counter.step()
 
-          // вот тут я не понимаю, почему оно не работает, 
-          // если это убрать
-          // TODO: исправить это недоразумение
           #context {
             if table-headers-counter.get().first() > 1 {
-              align(left)[
-                Продолжение таблицы #table-numbering
-              ]
+              align(left)[Продолжение таблицы #table-numbering]
+
               v(right-leadind)
             }
           }
@@ -456,14 +454,14 @@
 
       // отступ, т.к. таблица не текст, поэтому тут надо 
       // добавить leading (?)
-      v(right-leadind),
+      // v(right-leadind),
 
       // оставляем старый хедер
       it
     )
     
     // просто отступ 
-    v(1.0em, weak: true)
+    v(1.0em + right-leadind, weak: true)
   }
 
   // делает таблицу разрываемой
@@ -476,8 +474,8 @@
     // Просто дефолтное значение, если есть желание
     // можете менять в параметрах таблицы
     inset: (
-      bottom: right-leadind + 2pt,
-      top: 2pt,
+      bottom: 2pt,
+      top: right-leadind,
       x: 3pt,
     ),
 
@@ -555,8 +553,13 @@
   // Формулы
   #set math.equation(
     // нумерация вида (1.1) из 2.4.6
+
     numbering: (..nums) => {
-      if attachment-counter.get().first() < 1 {
+      // Установка шрифта для нумерации формул 
+      // Спасибо https://github.com/artemious3/bsuir_typst
+      show: set text(font: "Times New Roman")
+
+      if appendix-counter.get().first() < 1 {
         numbering(
           "(1.1)",
           counter(heading).get().first(),
@@ -566,8 +569,8 @@
         // приложения бла-бла-бла
       } else {
         [(]
-        attachment-letters.at(
-          attachment-counter.get().first() - 1
+        appendix-letters.at(
+          appendix-counter.get().first() - 1
         )
         [.]
         str(nums.pos().first())
