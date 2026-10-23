@@ -412,6 +412,8 @@
           #cap.body
         ]
       )
+
+      v(right-leadind)
     } 
 
     // отключение абзацных отступов для названия таблицы
@@ -475,7 +477,7 @@
     // можете менять в параметрах таблицы
     inset: (
       bottom: 2pt,
-      top: right-leadind,
+      top: 0pt,
       x: 3pt,
     ),
 
@@ -602,9 +604,8 @@
   )
 
   #show raw.where(block: true): it => {
-    v(1.0em, weak: false)
     it
-    v(1.0em, weak: false)
+    v(1.0em + right-leadind, weak: true)
   }
 
   #body

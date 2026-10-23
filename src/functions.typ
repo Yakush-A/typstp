@@ -4,12 +4,7 @@
 #let source-text(path, name) = {
   // чтение содержимого файла
 
-  // TODO: исправить это, если возможно.
-  // я сделал это в надежде, что никто 
-  // не додумается прописывать полный путь 
-  let real-path = "../template/" + path
-
-  let file-content = read(real-path)
+  let file-content = read(path)
     // обрезка переносов строк в файле 
     .trim(at: end, "\n")
     .trim(at: start, "\n")
@@ -74,7 +69,7 @@
   )[(#type) #name]
 
   // Добавление подписи типа приложения и его названия 
-  align(center)[ (#type) \ * #name * ]
+  align(center)[ * (#type) \ #name * ]
 
   v(1.0em, weak: true)
 }
