@@ -74,4 +74,17 @@
   v(1.0em, weak: true)
 }
 
+// двухуровневая нумерация для перечислений
+// взято из проекта https://github.com/artemious3/bsuir_typst
+//
+// TODO: если это получится, сделать возможность
+// ссылаться на элементы перечислений
+#let abclist(..a) = {
+  set enum(indent: 25mm, numbering: "1)")
+
+  let items = a.pos().enumerate().map(
+    ((idx,item)) => cyr-letters.at(idx) + ") " + item + parbreak()
+  )
+  parbreak()+items.join()
+}
 
