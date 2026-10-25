@@ -6,7 +6,8 @@
 
 #include "example.typ"
 
-#bibliography("sources.bib")
+// Экспериментальная библиография
+#bibliography("sources.yml")
 
 #appendix(
   "обязательное",

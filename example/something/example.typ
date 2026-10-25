@@ -69,7 +69,7 @@ $ x_1 = X - beta Y + beta^2 U ; #h(1cm)  x_2 = Y - beta U $
 - deepseek v4 pro #footnote[Секретный Deepseek API. #lorem(24)]<secret-DS-API>;
 - deepseek v4 flash #footnote[Еще один секретный Deepseek API. #lorem(16)]<another-secret-DS-API>;
 ====
-Deepseek V4 Pro -- очень хороший секретный API для большинства секретных задач #cite(<hook1999processors>).
+Deepseek V4 Pro -- очень хороший секретный API для большинства секретных задач #cite(<guk>).
 ====
 Deepseek V4 Flash тоже неплох, но он не такой секретный из-за даты выхода раньше Pro модели.
 
@@ -103,7 +103,7 @@ Deepseek V4 Flash тоже неплох, но он не такой секрет�
 
 // Продолжение списка, если это кому-то понадобится
 4. #lorem(20)
-+ #lorem(30)
++ #lorem(30) #cite(<kuz>)
 + #lorem(50)
 + #lorem(40)
 
@@ -118,7 +118,7 @@ Deepseek V4 Flash тоже неплох, но он не такой секрет�
 #figure(
   caption: [Табличка :)],
   table(
-    [Hi], [Helo], [Секретный DeepSeek API]
+    [Hi], [Helo #cite(<aksenov>)], [Секретный DeepSeek API]
   )
 )
 
