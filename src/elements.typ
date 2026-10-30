@@ -321,6 +321,8 @@
     }
   )
 
+  #show figure.caption: set text(hyphenate: false)
+
   // разделитель "тире" (которое n-dash) из 2.5.5
   #set figure.caption(
     separator: [ -- ],
@@ -376,44 +378,19 @@
       }
     ]
 
-    // Название таблицы (Таблица X -- название)
-    //
-    // TODO: сделать чтобы название таблицы 
-    // не вылазило за пределы таблицы
-    show figure.caption: cap => {
-      // grid т.к. название д.б. выравнено по левому краю
-      // независимо от номера таблицы
-      grid(
-        columns: (auto, auto),
-        column-gutter: 0.3em,
+    // Название таблицы будет писаться как хедер
+    show figure.caption: cap => {} 
 
-        // Таблица и ее номер
-        box({
-          cap.supplement
-          [ ]
-          table-numbering
-          cap.separator
-        }),
-        
-        // собственно текст названия таблицы
-        align(left)[ 
-          #cap.body
-        ]
-      )
-
-      v(right-leadind)
-    } 
-
-    // отключение абзацных отступов для названия таблицы
-    set par(first-line-indent: 0pt)
+    // Отключение переносов
+    set text(hyphenate: false)
+    // Отключение растягивания текста по ширине и отключение
+    // аюзацев для хедера
+    set par(first-line-indent: 0pt, justify: false)
 
     // создание новой таблицы со спец. header'ом
     table(
       fill: none,
-      inset: 0pt,
       stroke: 0pt,
-
-
 
       // Просто заберите у меня typst, это закончится плохо
       //
@@ -429,11 +406,34 @@
           // 2 => продолжение
           #context table-headers-counter.step()
 
+          #set text(hyphenate: false)
+
           #context {
+            // Если насчитывается более одного хедера т.е. 
+            // таблица продолжается на другой странице, ставим
+            // "Продолжение таблицы X"
             if table-headers-counter.get().first() > 1 {
               align(left)[Продолжение таблицы #table-numbering]
+            } else {
+              // Для первого хедера добавляем название таблицы
+              grid(
+                columns: (auto, 1fr),
+                column-gutter: 0.3em,
 
-              v(right-leadind)
+                // Таблица и ее номер
+                box({
+                  it.caption.supplement
+                  [ ]
+                  table-numbering
+                  it.caption.separator
+                }),
+        
+                // собственно текст названия таблицы
+                align(left)[ 
+                  #it.caption.body
+                ]
+              )
+              // v(right-leadind)
             }
           }
         ],
@@ -441,15 +441,10 @@
         // хедер с нумерованными столбцами, а не только текстом
       ),
 
-
-      // отступ, т.к. таблица не текст, поэтому тут надо 
-      // добавить leading (?)
-      // v(right-leadind),
-
-      // оставляем старый хедер
+      // остальное содержимое фигуры
       it
     )
-    
+
     // просто отступ 
     v(1.0em + right-leadind, weak: true)
   }
@@ -464,10 +459,13 @@
     // Просто дефолтное значение, если есть желание
     // можете менять в параметрах таблицы
     inset: (
-      bottom: 2pt,
+      bottom: right-leadind,
       top: 0pt,
       x: 3pt,
     ),
+    // Выравнивание хедера по-центру, остальных клеток 
+    // по левому краю
+    align: (x,y) => if y == 0 {center} else {left},
 
   )
 
@@ -599,6 +597,10 @@
   // всегда 8, но это "Рекомендуется",
   // так что, наверное, можно
   #show math.equation.where(block: true): it => {
+    
+    // Десятичный разделитель
+    show ".": ","
+
     v(8pt + right-leadind, weak: true)
     it 
     v(8pt, weak: true)
