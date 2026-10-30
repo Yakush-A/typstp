@@ -624,6 +624,9 @@
     v(1.0em + right-leadind, weak: true)
   }
 
+  // Приложения начинаются с новой страницы
+  #show figure.where(kind: "appendix"): it => {pagebreak() + it}
+
   #body
 
 ]

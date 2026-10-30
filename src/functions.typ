@@ -42,37 +42,55 @@
 }
 
 // функция создания приложения
-#let appendix(type, name) = {
-  // увеличение счетчика приложений (номер в массиве с буквами)
-  appendix-counter.step()
+// UPD: функция теперь создает фигуру с кастомным kind
+// "appendix" - "приложение" что позволяет давать ссылки
+// на него, боже почему я так плохо знаю этот язык, что
+// только сейчас это смог сделать...
+#let appendix(type, name) = figure(
+  kind: "appendix",
+  // Нумерация - буква приложения
+  numbering: (..nums) => {
+    appendix-letters.at(
+      appendix-counter.get().first()
+    )
+  },
+  supplement: [Приложение], 
+  // Никто этим не будет пользоваться, но это нужно для
+  // ссылки на приложения
 
-  // сброс счетчиков для рисунков, таблиц в приложениях
-  counter(figure.where(kind: image)).update(0)
-  counter(figure.where(kind: table)).update(0)
-  counter(math.equation).update(0)
+  // Тут идет тело приложения, как было до этого 
+  {
+
+    // увеличение счетчика приложений (номер в массиве с буквами)
+    appendix-counter.step()
+
+    // сброс счетчиков для рисунков, таблиц в приложениях
+    counter(figure.where(kind: image)).update(0)
+    counter(figure.where(kind: table)).update(0)
+    counter(math.equation).update(0)
 
 
-  // Полу-костыль, чтобы название приложения 
-  // отличалось от того, что в содержании
-  show heading: it => {
-    align(center)[
-      #pagebreak()
-      ПРИЛОЖЕНИЕ #context appendix-letters.at(appendix-counter.get().first() - 1)
-    ]
+    // Полу-костыль, чтобы название приложения 
+    // отличалось от того, что в содержании
+    show heading: it => {
+      align(center)[
+        ПРИЛОЖЕНИЕ #context appendix-letters.at(appendix-counter.get().first() - 1)
+      ]
+    }
+
+    // Формирование приложения как заголовка 1-го уровня,
+    // но со специальной нумерацией вида "Приложение Я".
+    // Да, именно со всем словом "Приложение"
+    heading(
+      numbering: appendix-numbering,
+    )[(#type) #name]
+
+    // Добавление подписи типа приложения и его названия 
+    align(center)[ * (#type) \ #name * ]
+
+    v(1.0em, weak: true)
   }
-
-  // Формирование приложения как заголовка 1-го уровня,
-  // но со специальной нумерацией вида "Приложение Я".
-  // Да, именно со всем словом "Приложение"
-  heading(
-    numbering: appendix-numbering,
-  )[(#type) #name]
-
-  // Добавление подписи типа приложения и его названия 
-  align(center)[ * (#type) \ #name * ]
-
-  v(1.0em, weak: true)
-}
+)
 
 // двухуровневая нумерация для перечислений
 // взято из проекта https://github.com/artemious3/bsuir_typst
