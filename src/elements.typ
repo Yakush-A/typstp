@@ -597,16 +597,23 @@
   // всегда 8, но это "Рекомендуется",
   // так что, наверное, можно
   #show math.equation.where(block: true): it => {
-    
-    // Десятичный разделитель
-    show ".": ","
-
     v(8pt + right-leadind, weak: true)
     it 
     v(8pt, weak: true)
   }
   // остальное по формулам вроде зависит
   // уже от того, кто пишет работу
+
+  #show math.equation: it => {
+    // Десятичный разделитель
+    show regex("^\d+\.\d+$"): num => {
+
+      let (a, b) = num.text.split(".")
+      a + math.class("normal", ",") + b
+    }
+
+    it
+  }
 
   #show raw: set text(
     font: source-text-font,
