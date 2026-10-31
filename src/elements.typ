@@ -56,8 +56,8 @@
     justify: true,
   
     // тот самый leading
-    leading: right-leadind, 
-    spacing: right-leadind,
+    leading: right-leading, 
+    spacing: right-leading,
 
     // абзацный отступ (красная строка)
     first-line-indent: (
@@ -121,7 +121,7 @@
 
   // добавление к заголовкам пробельной строки
   #show heading: it => {
-    v(line-height + right-leadind, weak: true)      // перед всеми заголовками 1 пробельная строка
+    v(line-height + right-leading, weak: true)      // перед всеми заголовками 1 пробельная строка
 
     // не добавлять абзацный отступ к заголовкам,
     // которые располагаются по-центру
@@ -133,7 +133,7 @@
     }
 
     if it.level < 3 {
-      v(line-height + right-leadind, weak: true)    // только после названий разделов, подразделов
+      v(line-height + right-leading, weak: true)    // только после названий разделов, подразделов
     }
   } 
 
@@ -204,7 +204,7 @@
     // если пуст - заголовка нет => номер пункта
     if is-heading-empty(it) {
       parbreak()
-      v(line-height + right-leadind, weak: true)            // почему-то этот отступ убрался (?)
+      v(line-height + right-leading, weak: true)            // почему-то этот отступ убрался (?)
 
       counter(heading).display()
       [ ]
@@ -234,7 +234,7 @@
       
       // оформление загловка пункта
       parbreak()
-      v(line-height + right-leadind, weak: true)
+      v(line-height + right-leading, weak: true)
       counter(heading).display()
       [ ]
 
@@ -283,7 +283,7 @@
   }
 
   #show outline.entry: it => {
-    show: set text(
+    set text(
       hyphenate: false,
     )
     it
@@ -339,9 +339,9 @@
   // добавление отступов перед рисунком и после подписи
   #show figure.where(kind: image): it => {
 
-    v(line-height + right-leadind, weak: true)
+    v(line-height + right-leading, weak: true)
     it
-    v(line-height + right-leadind, weak: true)
+    v(line-height + right-leading, weak: true)
 
   }
 
@@ -357,7 +357,7 @@
 
   // добавление к таблице номера в специальном формате
   #show figure.where(kind: table): it => {
-    v(1.0em + right-leadind, weak: true)
+    v(1.0em + right-leading, weak: true)
 
     // обнуление счетчика шапок таблиц
     table-headers-counter.update(0)
@@ -433,7 +433,7 @@
                   #it.caption.body
                 ]
               )
-              // v(right-leadind)
+              // v(right-leading)
             }
           }
         ],
@@ -446,7 +446,7 @@
     )
 
     // просто отступ 
-    v(1.0em + right-leadind, weak: true)
+    v(1.0em + right-leading, weak: true)
   }
 
   // делает таблицу разрываемой
@@ -459,7 +459,7 @@
     // Просто дефолтное значение, если есть желание
     // можете менять в параметрах таблицы
     inset: (
-      bottom: right-leadind,
+      bottom: right-leading,
       top: 0pt,
       x: 3pt,
     ),
@@ -484,7 +484,7 @@
   )
 
   #set footnote.entry(
-    gap: right-leadind,
+    gap: right-leading,
     clearance: 0em,
   )
 
@@ -494,8 +494,8 @@
       size: font-size,
     )
     set par(
-      spacing: right-leadind,
-      leading: right-leadind,
+      spacing: right-leading,
+      leading: right-leading,
     )
 
     h(1.25cm, weak: false)        // абзацный отступ
@@ -590,6 +590,13 @@
     number-align: right + bottom,
   )
 
+  #show math.equation: set text(
+    font: (
+      "TeX Gyre Termes Math"
+    ),
+    fallback: true
+  )
+
   // Добавление отступов из 2.4.3 
   // я в душе не чаю, как сделать их 
   // 6 и 8 пт в зависимости от наличия 
@@ -597,9 +604,9 @@
   // всегда 8, но это "Рекомендуется",
   // так что, наверное, можно
   #show math.equation.where(block: true): it => {
-    v(8pt + right-leadind, weak: true)
+    v(1em + right-leading, weak: true)
     it 
-    v(8pt, weak: true)
+    v(1em + right-leading, weak: true)
   }
   // остальное по формулам вроде зависит
   // уже от того, кто пишет работу
@@ -621,7 +628,7 @@
 
   #show raw.where(block: true): it => {
     it
-    v(1.0em + right-leadind, weak: true)
+    v(1.0em + right-leading, weak: true)
   }
 
   // Приложения начинаются с новой страницы

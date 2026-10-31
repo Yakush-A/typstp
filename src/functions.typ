@@ -106,3 +106,29 @@
   parbreak()+items.join()
 }
 
+#let explanation(terms) = {
+  set grid(
+    columns: (auto, 1fr),
+    column-gutter: 0.3em,
+  )
+
+  grid(
+    [где], 
+    {
+      terms.children
+        .filter(x => x != [ ])
+        .map(x => grid(
+          {
+            x.term + [ -- ]
+          },
+          par(
+            first-line-indent: 0pt,
+            x.description
+          )
+        ))
+        .join()
+
+    }
+  )
+}
+
