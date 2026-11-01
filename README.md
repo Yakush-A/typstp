@@ -70,7 +70,7 @@ git clone git@github.com:Yakush-A/typstp.git path/to/repo
 
 mkdir -p ~/.local/share/typst/packages/preview
 
-ln -s path/to/repo ~/.local/share/typst/packages/preview/typo-stp
+ln -s path/to/repo/typo-stp ~/.local/share/typst/packages/preview/typo-stp
 ```
 
 Для проверки правильности установки попробуйте инициализировать актуальную
