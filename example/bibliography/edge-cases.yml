@@ -1,0 +1,182 @@
+# --- 1. Один автор. Заголовок: «Гук, М.», ответственность: «М. Гук»
+guk:
+  type: book
+  title: Процессоры Pentium II, Pentium Pro и просто Pentium
+  author: "Гук, Михаил"
+  publisher: {name: Питер Ком, location: СПб.}   # место сразу в сокращённом виде
+  date: 1999
+  page-total: 288                                # число -> «288 с.»
+
+# --- 2. Три автора: заголовок по первому, в ответственности все трое
+kuz:
+  type: book
+  title: Современные семейства ПЛИС фирмы Xilinx
+  genre: справ. пособие                          # сведения после « : », со строчной буквы
+  author: ["Кузелин, Михаил Олегович", "Кнышев, Дмитрий Александрович", "Зотов, Валерий Юрьевич"]
+  publisher: {name: Горячая линия – Телеком, location: М.}
+  date: 2004
+  page-total: 440
+
+# --- 3. Четыре и более авторов: НЕ author, а collaborator (нет заголовка, «[и др.]»)
+klu:
+  type: book
+  title: Технические средства диагностирования
+  genre: справочник
+  affiliated:
+    - role: collaborator
+      names: ["Клюев, В. В.", "Иванов, И. И.", "Петров, П. П.", "Сидоров, С. С."]
+  publisher: {name: Машиностроение, location: М.}
+  date: 1989
+  page-total: 672
+
+# --- 4. Коллективный автор: тоже collaborator, одним полем; нет издательства и объёма
+intel:
+  type: book
+  title: Embedded Microcontrollers
+  genre: Databook
+  affiliated:
+    - role: collaborator
+      names: ["Intel Corporation"]
+  publisher: {location: "Santa Clara, Ca"}       # без издательства: «Город, год»
+  date: 1994
+
+# --- 5. Автор без инициалов: через author выйдет «Аристотель Метафизика» (нет точки),
+#        поэтому collaborator: «Метафизика / Аристотель»
+aristotle:
+  type: book
+  title: Метафизика
+  affiliated:
+    - role: collaborator
+      names: ["Аристотель"]
+  publisher: {name: Мысль, location: М.}
+  date: 1975
+
+# --- 6. Многотомник без авторов, один том; редактор в РОДИТЕЛЬНОМ падеже
+shahnov:
+  type: book
+  title: Микропроцессоры и микропроцессорные комплекты интегральных микросхем
+  genre: справочник
+  volume-total: 2                                # «В 2 т.»
+  volume: 1                                      # «Т. 1»
+  editor: "Шахнова, В. А."                       # -> «под ред. В. А. Шахнова»
+  publisher: {name: Радио и связь, location: М.}
+  date: 1988
+  page-total: 368
+
+# --- 7. Многотомник с авторами (>3)
+yarmolik:
+  type: book
+  title: Проектирование самотестируемых СБИС
+  genre: монография
+  volume-total: 2
+  affiliated:
+    - role: collaborator
+      names: ["Ярмолик, В. Н.", "Иванов, И. И.", "Петров, П. П.", "Сидоров, С. С."]
+  publisher: {name: БГУИР, location: Минск}      # Минск пишем полностью
+  date: 2001
+
+# --- 8. Издание числом -> «2-е изд.»; нет места при наличии издательства -> «[Б. м.]»
+edition-num:
+  type: book
+  title: Основы теории
+  author: "Иванов, Иван Петрович"
+  edition: 2
+  publisher: {name: Наука}
+  date: 2010
+  page-total: 300
+
+# --- 9. Издание строкой -> выводится как есть
+edition-str:
+  type: book
+  title: Основы теории
+  author: "Иванов, Иван Петрович"
+  edition: "2-е изд., перераб. и доп."
+  publisher: {name: Наука, location: М.}
+  date: 2010
+
+# --- 10. Переводчик: фамилия в родительном падеже -> «пер. А. Б. Петрова»
+translated:
+  type: book
+  title: Язык программирования
+  author: "Керниган, Брайан"
+  affiliated:
+    - role: translator
+      names: ["Петрова, А. Б."]
+  publisher: {name: Вильямс, location: М.}
+  date: 2015
+
+# --- 11. Статья в журнале: том, номер, страницы
+berski:
+  type: article
+  title: Набор ЭСЛ-микросхем для быстродействующего RISC-процессора
+  author: "Берски, Д."
+  date: 1989
+  parent: {type: periodical, title: Электроника}
+  issue: 12                                      # -> «№12»
+  page-range: 21-25                              # дефис -> «–»
+journal-volume:
+  type: article
+  title: Статья с томом
+  author: "Лис, А. А."
+  date: 2012
+  parent: {type: periodical, title: Вестник}
+  volume: 5                                      # -> «Т. 5, №3»
+  issue: 3
+  page-range: 10-20
+
+# --- 12. Газета: полная дата, месяц в родительном падеже выводится сам -> «5 марта»
+newspaper:
+  type: article
+  title: Новости науки
+  author: "Сидоров, С. С."
+  date: 2004-03-05
+  parent: {type: newspaper, title: Известия}
+  page-range: 3
+
+# --- 13. Статья в сборнике: название сборника целиком (с «: сб. науч. тр. В 2 ч.»),
+#         редактор внутри parent -> «отв. ред.», родительный падеж
+aksenov:
+  type: article
+  title: Методика формирования обучающих выборок для распознающей системы
+  author: "Аксенов, О. Ю."
+  date: 2004
+  page-range: 215-222
+  parent:
+    type: proceedings
+    title: "VI Всероссийская науч.-техн. конференция «Нейроинформатика-2004» : сб. науч. тр. В 2 ч."
+    editor: "Мишулина, О. А."
+    publisher: {name: МИФИ, location: М.}
+
+# --- 14. Сайт: «[Электронный ресурс]» и «Режим доступа» ставятся сами
+xilinx:
+  type: web
+  title: Xilinx
+  url: http://www.plis.ru/                       # только абсолютный URL
+
+# --- 15. Файл: сведения (genre), коллективный автор, URL
+datasheet:
+  type: web
+  title: Mobile Intel® Pentium® Processor-M
+  genre: Datasheet
+  affiliated:
+    - role: collaborator
+      names: ["Intel Corporation"]
+  url: http://www.intel.com/25068604.pdf         # для локального «25068604.pdf» нужен http://-префикс
+
+# --- 16. Компакт-диск: type repository даёт «[Электронный ресурс]», объём в note
+nokia:
+  type: repository
+  title: Nokia+Компьютер
+  genre: инструкции, программы, драйверы, игры, мелодии, картинки для Nokia
+  publisher: {location: М.}
+  date: 2004
+  note: 1 компакт-диск (CD-R)                    # текстовый объём
+
+# --- 17. Электронная книга: для type book метка автоматически НЕ ставится — пишем в title
+ebook:
+  type: book
+  title: Учебник по Typst [Электронный ресурс]
+  author: "Сидоров, С. С."
+  publisher: {name: Наука, location: М.}
+  date: 2024
+  url: https://example.com/book.pdf

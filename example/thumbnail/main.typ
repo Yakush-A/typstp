@@ -1,4 +1,4 @@
-#import "@preview/typo-stp:0.1.1": *
+#import "@preview/typo-stp:0.2.0": *
 
 #show: template
 
@@ -7,7 +7,7 @@
 == Первый подраздел
 
 ===
-#lorem(30)
+#lorem(20)
 
 ===
 #lorem(20)
@@ -37,10 +37,9 @@ $ K = F C^2 $
   caption: [Допустим, таблица],
   table(
     columns: (1fr, 1fr, 1fr),
-    inset: (y: 3pt),
     table.header([Шаблон Typst], [СТП БГУИР], [Версия шаблона]),
     [Да],
     [Почти],
-    [0.1.1],
+    [0.2.0],
   ),
 )
