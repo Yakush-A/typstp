@@ -23,23 +23,12 @@
   ]
 }
 
-#let introduction = {
-  heading(numbering: none)[
-    Введение
-  ]
-}
+#let introduction = heading(numbering: none)[Введение]
 
-#let abstract = {
-  heading(numbering: none)[
-    Реферат
-  ]
-}
+#let abstract = heading(numbering: none)[Реферат]
 
-#let conclusion = {
-  heading(numbering: none)[
-    Заключение
-  ]
-}
+#let conclusion = heading(numbering: none)[Заключение]
+
 
 // функция создания приложения
 // UPD: функция теперь создает фигуру с кастомным kind
@@ -106,29 +95,72 @@
   parbreak()+items.join()
 }
 
-#let explanation(terms) = {
-  set grid(
-    columns: (auto, 1fr),
-    column-gutter: 0.3em,
-  )
+// Функция создания перечня из 2.4.7
+//
+// terms - Typst Term List для перечня
+// supplement - слово, которое будет указано перед перечнем, по дефолту "где",
+//              также возможны свои, условно [Здесь], либо none - без слова,
+//              каждый символ будет писаться с красной строки
+#let explanation(terms, supplement : [где]) = {
+  
+  // Если есть supplement строится grid 
+  if supplement != none {
+    set grid(
+      columns: (auto, 1fr),
+      column-gutter: 0.3em,
+    )
 
-  grid(
-    [где], 
-    {
-      terms.children
-        .filter(x => x != [ ])
-        .map(x => grid(
-          {
-            x.term + [ -- ]
-          },
-          par(
-            first-line-indent: 0pt,
-            x.description
-          )
-        ))
-        .join()
+    // внешний grid для слова перед перечнем 
+    grid(
+      // "слово" ну блин я не знаю как это нормально назвать
+      // в СТП буквально пишут "Перечень начинают со слова "где"
+      supplement, 
 
-    }
-  )
+      // Правая ячейка grid - список символов
+      {
+        // Каждый символ преобразуется в внутренний grid
+        // из собственно себя, тире и его расшифровки
+        // типа [символ] [ -- расшифровка как абзац]
+        // "[]" - клетка grid
+        terms.children
+          .filter(x => x != [ ])
+          .map(x => grid(
+            { x.term + [ -- ] },
+            par(first-line-indent: 0pt)[#x.description]
+          )).join()
+      }
+    )
+    // Если нет слова - тупо оформляем как абзацы
+    // TODO: понять, что они имели в виду под 
+    // "Разрешается расшифровку начинать с обобщающих слов, после которых
+    // следует ставить двоеточие, а каждый поясняемый символ начинать с красной
+    // строки."
+    // Каждый символ делать абзацем или делать как в случае со словом,
+    // но с отступом 1.25см?
+  } else {
+    // символы опять мапятся только в сплошной абзац
+    terms.children
+      .filter(x => x != [ ])
+      .map(x => par(x.term + [ -- ] + x.description))
+      .join()
+  }
 }
+
+// Функция создания grid'а из нескольких рисунков, пронумерованных "а", "б", ...
+//
+// TODO: если получится, сделать возможность ссылаться на элементы
+#let abc-images(multiimages) = grid(
+  // Количество столбцов - длина переданного массива 
+  columns: multiimages.len(),
+  column-gutter: 0.5em,
+
+  // Собственно переданный массив
+  ..multiimages,
+
+  // Нумерация каждого элемента "а", "б", ...
+  ..multiimages.enumerate()
+    .map(x => x.first())
+    .map(x => [#cyr-letters.at(x)]),
+  )
+)
 
