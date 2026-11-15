@@ -9,8 +9,8 @@
     size: font-size,
 
     // На... ~кхм~ зачем делать стандарты только под микрослоп ворд...
-    top-edge: 1em,       // установка top-edge и bottom-edge 
-    bottom-edge: 0em,    // чтобы правильно работал leading
+    top-edge: 0.70em,       // установка top-edge и bottom-edge 
+    bottom-edge: -0.3em,    // чтобы правильно работал leading
 
     hyphenate: true,    // переносы
 
@@ -47,7 +47,7 @@
     footer: context {
       place(
         bottom + right,
-        dy: -1cm,
+        dy: -1cm + right-leading,
         counter(page).display(),
       )
     }
@@ -382,12 +382,12 @@
   // надпись и её отступ от самого рисунка
   #show figure.where(kind: image): set figure(
     supplement: "Рисунок",
-    gap: 1.0em,
+    gap: line-height + right-leading,
   )
   // добавление отступов перед рисунком и после подписи
   #show figure.where(kind: image): it => {
 
-    v(line-height + right-leading, weak: true)
+    v(line-height, weak: true)
     it
     v(line-height + right-leading, weak: true)
 
@@ -400,12 +400,12 @@
   #show figure.caption.where(kind: table): set align(left)
   #show figure.where(kind: table): set figure(
     supplement: "Таблица",
-    gap: table-caption-indent,
+    gap: 1em,
   )
 
   // добавление к таблице номера в специальном формате
   #show figure.where(kind: table): it => {
-    v(1.0em + right-leading, weak: true)
+    v(line-height + right-leading, weak: true)
 
     // обнуление счетчика шапок таблиц
     table-headers-counter.update(0)
@@ -454,7 +454,11 @@
           // 2 => продолжение
           #context table-headers-counter.step()
 
-          #set text(hyphenate: false)
+          #set text(
+            hyphenate: false,
+            top-edge: 1em,
+            bottom-edge: 0em
+          )
 
           #context {
             // Если насчитывается более одного хедера т.е. 
@@ -500,7 +504,7 @@
     )
 
     // просто отступ 
-    v(1.0em + right-leading, weak: true)
+    v(line-height + right-leading, weak: true)
   }
 
   // делает таблицу разрываемой
@@ -513,8 +517,8 @@
     // Просто дефолтное значение, если есть желание
     // можете менять в параметрах таблицы
     inset: (
-      bottom: right-leading,
-      top: 0pt,
+      bottom: 0pt,
+      top: right-leading,
       x: 3pt,
     ),
     // Выравнивание хедера по-центру, остальных клеток 

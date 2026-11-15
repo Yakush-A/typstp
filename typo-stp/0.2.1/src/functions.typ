@@ -160,7 +160,7 @@
   // Нумерация каждого элемента "а", "б", ...
   ..multiimages.enumerate()
     .map(x => x.first())
-    .map(x => [#cyr-letters.at(x)]),
+    .map(x => [#v(right-leading) #cyr-letters.at(x)]),
   )
 )
 
