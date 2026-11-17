@@ -384,13 +384,31 @@
     supplement: "Рисунок",
     gap: line-height + right-leading,
   )
-  // добавление отступов перед рисунком и после подписи
+
+// если указан пустой caption: [], выводим только надпись рисунка
+  #show figure.caption.where(kind: image): it => context {
+    it.supplement
+    [ ]
+    it.counter.display(it.numbering)
+    if it.body != [] {
+      it.separator
+      it.body
+    }
+  }
+
+  // отступы перед и после рисунка
   #show figure.where(kind: image): it => {
-
-    v(line-height, weak: true)
-    it
     v(line-height + right-leading, weak: true)
-
+    it
+    if it.caption == none {
+      v(it.gap, weak: true)
+      align(center, context {
+        it.supplement
+        [ ]
+        it.counter.display(it.numbering)
+      })
+    }
+    v(line-height + right-leading, weak: true)
   }
 
   // настройки для таблиц
