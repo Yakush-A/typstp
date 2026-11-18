@@ -73,3 +73,12 @@
 )
 #include "appendix.typ"
 
+#appendix(
+  "обязательное",
+  "Демонстрация рисунков без названия"
+)
+#figure(image("обрезанный-deepseek-API-1.jpg", width: 100%))
+#figure-sheet(2, 
+  image("обрезанный-deepseek-API-2.jpg", width: 100%)
+)
+

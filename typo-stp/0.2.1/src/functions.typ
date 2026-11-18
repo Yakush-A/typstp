@@ -164,3 +164,22 @@
   )
 )
 
+// продолжение многостраничного рисунка на следующем листе (п. 2.5.6)
+// sheet — номер листа (начиная со 2-го)
+#let figure-sheet(sheet, body) = {
+  // не увеличиваем счетчик рисунков, т.к. это продолжение текущего рисунка
+  counter(figure.where(kind: image)).update(n => n - 1)
+
+  show figure.caption.where(kind: image): it => context {
+    it.supplement
+    [ ]
+    it.counter.display(it.numbering)
+    [, лист #sheet]
+  }
+
+  figure(
+    body,
+    kind: image,
+    caption: [],
+  )
+}
