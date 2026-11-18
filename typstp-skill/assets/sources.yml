@@ -1,0 +1,12 @@
+# Пример библиографии Hayagriva для typo-stp.
+# Формат описаний — ГОСТ 7.1-2003; стиль пакета экспериментальный,
+# проверяйте итоговый список в PDF.
+#
+# Ключ используется для цитирования: #cite(<guk>) или @guk.
+guk:
+  type: book
+  title: Процессоры Pentium II, Pentium Pro и просто Pentium
+  author: "Гук, Михаил"
+  publisher: {name: Питер Ком, location: СПб.}
+  date: 1999
+  page-total: 288
