@@ -1,4 +1,4 @@
-#import "@preview/typo-stp:0.2.0": *
+#import "@preview/typo-stp:0.2.1": *
 #show: template
 
 #outline()
