@@ -1,165 +1,235 @@
 ---
-name: Typo STP (BSUIR)
-description: "Write and edit BSUIR/БГУИР academic documents per СТП 01-2024 in Typst with the typo-stp package. Use for explanatory notes, term and lab reports, diplomas — structure, sections, lists, formulas, figures, tables, appendices, GOST bibliography, title page, and compliance checks."
+name: typstp-skill
+description: "Write, edit and check BSUIR (БГУИР) academic documents in Typst with the typo-stp package per СТП 01-2024: diploma projects (дипломный проект, дипломная работа), course papers (курсовой проект, курсовая работа), lab reports (отчёт по лабораторной работе), typical calculations, essays. Covers пояснительная записка, headings, figures, tables, formulas, appendices, footnotes and the список использованных источников in ГОСТ 7.1-2003 (Hayagriva). Use when the user mentions typo-stp, СТП, БГУИР, пояснительная записка, курсовая, лабораторная, Typst report or Typst bibliography."
 ---
 
-# Typo STP — BSUIR documents in Typst
+# Typo STP — BSUIR academic documents in Typst
 
-This skill covers the text part of a пояснительная записка (ПЗ) formatted
-according to **СТП 01-2024** with the **`typo-stp`** package (Typst).
-Scope: document structure, layout, headings, lists, formulas, figures, tables,
-appendices, bibliography, footnotes, front matter.
-Out of scope: graphic material (СТП section 3: schemes, drawings, ЕСКД).
+Use this skill for the text part of a BSUIR course paper, laboratory report,
+or diploma project written with `@preview/typo-stp:0.2.1`. The package applies
+the recurring typography; the authoring task is to create accurate content and
+semantic Typst markup.
 
-Target package version: **0.2.0** (repo `main`). Version 0.2.1 is an
-unreleased branch; see `references/package-api.md` before using its features.
+Scope: structure and content of the text document, headings, lists, formulas,
+figures, tables, appendices, footnotes, and bibliography. Graphic material
+governed by ESKD/ESTD/ESPD and department-specific forms are outside scope.
 
-## Read first
+## Document type decides which СТП rules apply
 
-Load these files before writing or changing a document — they are not loaded
-automatically:
+СТП 01-2024 is written for diploma projects. Its sections 2 and 3 (formatting,
+text, formulas, figures, tables, appendices, bibliography) also apply to course
+papers, typical calculations, essays and lab reports. Section 1 (composition,
+page counts, abstract, introduction/conclusion content) is **diploma-only**.
 
-1. `references/stp-requirements.md` — normative rules with СТП clause numbers.
-   Read the sections relevant to the task; read sections 1–4 for any new
-   document.
-2. `references/package-api.md` — what `typo-stp` exports and what the template
-   already does. Read before adding any layout or numbering code.
-3. `references/recipes.md` — copy-paste snippets and a table of verified
-   pitfalls. Read the recipe for each element you are about to write.
+| Rules | Diploma | Course paper | Lab report |
+| --- | --- | --- | --- |
+| Formatting and text rules (СТП section 2) | yes | yes | yes |
+| Fixed composition (title, abstract, assignment, contents, introduction, conclusion, bibliography, appendices, document register) | yes | no, set by the department | no |
+| Abstract | yes | usually none | usually none |
+| Contents / introduction / conclusion | yes | per department | may be absent |
+| 60–80 pages, economics ≤ 18 %, labour protection 5–7 % | yes | no | no |
+| «Данный дипломный проект выполнен мной лично…» sentence | yes | only if required | no |
 
-Assets:
+The course and lab columns are BSUIR practice, not text of the standard. Ask
+the user for the document type and the department requirements before
+choosing structure; never default to the diploma structure. Every section of
+`references/stp-requirements.md` and `references/writing-style.md` is tagged
+**[ВСЕ]** or **[ТОЛЬКО ДИПЛОМ]**; apply only tags that match the document.
 
-- `assets/main.typ` — document skeleton; copy it into the project.
-- `assets/sources.yml` — Hayagriva bibliography example.
-- `assets/title-page.typ` — approximate title page per СТП Appendix В.
-- `assets/check.sh` — compile + structural checks; run it from this skill's
-  directory against the project's main file.
+## Start with the project and the user
 
-## Workflow
+1. Inspect the project: main file, package version, `#show: template`,
+   included chapters, bibliography, and existing front matter.
+2. Establish the document type (diploma / course paper / lab report / other)
+   and its required structure with the user. Do not infer diploma-only parts
+   (abstract, economic section, labour protection, introduction and conclusion
+   length and wording, page counts, originality sentence) for a course paper
+   or laboratory report.
+3. Require the user's approved title page and assignment sheet when either is
+   required. Include their supplied files or content; never invent signatures,
+   codes, approvals, dates, department forms, or a substitute title page.
+4. For a new document, use `assets/main.typ` only as a Typst skeleton. It is
+   not a prescribed chapter structure.
 
-1. **Inspect the project.** Find the main file (`#show: template`), the
-   package version in `#import`, included chapter files, fonts, and whether
-   front matter (title/abstract/task) exists.
-2. **Set up** with `assets/main.typ` and `assets/sources.yml` if the project is
-   new. Keep one `#show: template` in the main file only.
-3. **Write content** using `references/recipes.md`. Put each section in its own
-   included file if the project already does so.
-4. **Compile often:** `typst compile main.typ`. Fix errors immediately; a
-   table without a caption fails at compile time.
-5. **Run checks:** `bash <this-skill>/assets/check.sh main.typ` (add a package
-   path as the second argument when testing a local package). Review every
-   warning.
-6. **Manual review** against the checklist below and the relevant clauses in
-   `references/stp-requirements.md`.
+Read only the references needed for the change:
 
-## Golden rules
+- `references/package-api.md` before changing markup, numbering, or layout.
+- `references/recipes.md` before adding the corresponding document element.
+- `references/stp-requirements.md` when a СТП requirement affects the task;
+  for diploma projects, read its sections 0–1 before drafting.
+- `references/writing-style.md` when writing or editing prose: phrasing,
+  numbers and units, formula wording, references to figures/tables/sources,
+  introduction and conclusion (diploma).
+- `references/bibliography.md` **always** before creating or editing
+  bibliography records.
+- `assets/sources.yml` before creating or editing Hayagriva records. It holds
+  verified patterns for every source type in the СТП samples and for the edge
+  cases (4+ authors, corporate author, volumes, newspaper, CD, e-book).
 
-These are verified behaviours of `typo-stp 0.2.0`; breaking them produces
-wrong output or compile errors.
+## What the LLM does
 
-1. **Never format headings by hand.** Use `=`, `==`, `===`, `====` and write
-   the title in normal sentence case. The template uppercases sections in the
-   body, keeps the original case in the contents, bolds headings, centres
-   unnumbered ones, and adds spacing. No `#upper`, `*...*`, or `#align`.
-2. **A point without a title is an empty `===`.** A titled point is
-   `=== Название`; it is included in the contents, an untitled point is not.
-   Level 4 (`====`) prints **only the number** — the template drops its title,
-   so use it without a title.
-3. **Figures and tables only through `#figure(...)`.** A table must have
-   `caption: [...]`; otherwise compilation fails with
-   `cannot access fields on type none`.
-4. **No numbered elements in the introduction or abstract.** Figures, tables
-   and equations there get numbers `0.1`, `(0.1)` because the section counter
-   is zero. Move them into the first numbered section.
-5. **No headings inside appendices.** The section counter is not reset by
-   `#appendix(...)`, so `=`, `==`, `===` inside an appendix get wrong numbers
-   (`2.1`, `3`, ...). Use plain paragraphs.
-6. **Appendices go last.** After the first appendix, all figures/tables/
-   equations are treated as appendix elements. Refer to every appendix in the
-   text.
-7. **Do not nest `-` bullet lists.** The template's list show-rule drops nested
-   items. Use `#abclist` for two-level lettered lists.
-8. **A new numbered list restarts at 1.** To continue after a blank line, set
-   the first number explicitly: `4. Четвёртый пункт;` then `+ ...`.
-9. **Use the right reference form.**
-   `@fig` → «Рисунок 1.1»; after the word «рисунке» use `@fig[]` → «1.1».
-   `@tab[]` → «1.1»; `@eq[]` → «(1.1)»; `@app[приложении]` → «приложении Б».
-   Never write `на рисунке @fig` (it yields «на рисунке Рисунок 1.1»).
-10. **Do not add `СОДЕРЖАНИЕ` or `СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ`
-    headings manually.** `#outline()` and `#bibliography(...)` add them,
-    including centring, uppercase, and a page break.
-11. **`#source-text` needs `path(...)`:** `#source-text(path("file.py"), "file.py")`.
-12. **Do not invent continuous numbering or references to list items.** The
-    package resets counters in every section and has no list-item labels.
-    Keep the standard's per-section numbering and refer to list items in prose
-    («в соответствии с пунктом 1.7, б»).
-13. **Bibliography is experimental.** The GOST 7.1-2003 CSL style may format
-    some sources incorrectly; inspect the PDF. Wikipedia and similar open
-    wikis are forbidden by the standard.
+- Ask for missing factual inputs that cannot safely be invented: approved
+  structure, title/assignment files, source details, measurements, formulas,
+  results, labels, and departmental requirements.
+- Build the requested semantic structure with Typst headings and write or edit
+  clear technical text. Use `=`, `==`, `===`, and `====` only for the levels
+  the user chooses; never type heading numbers manually.
+- Use package functions correctly: `#outline()`, `#figure`, `#appendix`,
+  `#explanation`, `#source-text`, and `#bibliography`.
+- Preserve source attribution. Check that every figure, table, and appendix is
+  cited in the text; appendices must follow the order of their first citation.
+- Build bibliography entries in Hayagriva following `references/bibliography.md`
+  and `assets/sources.yml`; never use `.bib` (some cases do not work there).
+  Inspect the rendered list against its checklist.
+- Write prose in СТП style (`references/writing-style.md`): «получаем», not
+  «мы получили»; numbers and units; references with `~` before `@key`.
+- Compile after material edits and review warnings and the PDF when it is
+  produced. Inspect page filling (only trust it when the checker reports real or
+  proxy Times New Roman): when the remaining space at a page bottom is
+  avoidably empty and the next content is not required to start a new section,
+  remove accidental whitespace or let the natural following content flow onto
+  that page. Do not force-fill pages with invented text or manual spacing.
+  Report package limitations rather than silently overriding them.
 
-## What the template already handles
+## Checking the result
 
-Do not duplicate these in the document:
+Run the checker after material edits and before reporting the work as done:
 
-| Area | Handled by `template` |
+```bash
+bash assets/check.sh --type diploma|course|lab|other [--strict] main.typ [package-path]
+```
+
+Always pass `--type`; ask the user for it if unknown. Sections 2–3 of the СТП
+checks run for every type. Section 1 checks (introduction ≤ 2 pages,
+conclusion ≈ 1.5–2 pages, 60–80 pages before appendices, Wikipedia ban, mandatory
+`#outline()`) run **only** for `diploma`. For `lab` a missing contents page is
+not reported.
+
+What it checks:
+
+- **Fonts.** Looks for Times New Roman (and Courier New, TeX Gyre Termes Math).
+  Without Times New Roman it builds a temporary proxy from Liberation Serif
+  (metrically compatible, needs `fonttools` and `fonts-liberation2`) so page
+  counts and line breaks stay trustworthy; the final PDF for submission must
+  still be built with real Times New Roman. If neither is available the
+  script warns that page counts and page filling are **unreliable**; do not
+  draw conclusions about volumes or white space then.
+- **Margins** (30/15/20/20 mm) by text positions and by rendered pixels, so
+  figures, shapes and table lines that overflow are caught too.
+- **Structure:** captions, labels, references from the text to every figure,
+  table and appendix, `0.x` numbering, level-4 headings.
+- **Text lint** on the PDF: banned phrasing («мы получили», «по (2.1)»,
+  «мощностью в 600 Вт», «п. 1.7», duplicated «Рисунок Рисунок»).
+- **Sources:** `.typ` source lint (manual page breaks, `#set page/par`, manual
+  `[N]`, missing `~` before citations) and Hayagriva lint (4+ authors in
+  `author`, relative `url`, `genre` equal to `title`, full city names,
+  uncited keys, BibLaTeX-only fields).
+- **Spelling** with hunspell `ru_RU` (else aspell, else pyspellchecker). It
+  reports unknown words only; terms and surnames appear there too. Put
+  confirmed words, one per line, into `.typstp-words.txt` beside `main.typ`
+  (or pass `--words FILE`) and do not report them again. Never "fix" a term
+  just because the checker flagged it.
+
+Treat every WARN as a lead, not a verdict: text and spelling checks are
+heuristics. Fix real defects in the `.typ` source, never by manual spacing.
+Exit code is 0 unless compilation fails; `--strict` also returns 1 on any
+WARN (use it in CI).
+
+Other tools, all standard poppler/typst utilities, for ad-hoc inspection:
+
+| Need | Command |
 | --- | --- |
-| Page | A4, margins 3/1.5/2/2 cm, page number bottom right 10 mm from edge |
-| Text | Times New Roman 14 pt, 18 pt line spacing, justified, 1.25 cm indent |
-| Headings | Numbering `1.1.1.1`, bold, uppercase sections, page breaks, outline |
-| Lists | `–` marker and paragraph layout for `-`; `1` numbering for `+` |
-| Contents | Title, depth 3, dot leaders, no hyphenation in entries |
-| Figures | Numbering per section / appendix letter, caption below, spacing |
-| Tables | Caption above, header repeat, «Продолжение таблицы X», cell break rules |
-| Formulas | `(section.n)` / `(А.n)`, right-bottom number, decimal comma |
-| Footnotes | `1)` numbering, bottom-of-page layout, indent |
-| Appendices | New page, `ПРИЛОЖЕНИЕ А`, type in parentheses, numbering reset |
-| Bibliography | Heading, `[n]` paragraphs, GOST CSL |
+| Fonts available to Typst | `typst fonts \| grep -i "times new roman"` |
+| Fonts embedded in the PDF | `pdffonts main.pdf` |
+| Page count and A4 size | `pdfinfo main.pdf` |
+| Text with line positions | `pdftotext -layout main.pdf -` or `pdftotext -bbox-layout main.pdf out.html` |
+| Look at pages (images) | `pdftoppm -r 60 -png main.pdf page` |
+| PDF validity | `qpdf --check main.pdf` |
+| Labels, references, headings | `typst query main.typ "figure"` / `"ref"` / `"heading"` |
 
-## Verification checklist
+For spelling install `hunspell` and `hunspell-ru` (apt); for the proxy font
+`pip install fonttools` and `fonts-liberation2`; for source lint
+`pip install pyyaml`; for the pixel margin check `pip install pillow`. Missing
+optional tools produce a NOTE, not a failure.
 
-Run the bundled `assets/check.sh` first (from this skill's directory), then
-check manually:
+## What `template` already does
 
-- **Layout:** fonts resolve to Times New Roman / Courier New / TeX Gyre Termes
-  Math; margins and 14 pt / 18 pt / 1.25 cm look right in the PDF.
-- **Numbering:** figures, tables and formulas start at `1.1`/`(1.1)` in each
-  section, never `0.x`; appendices use `А.1`, `(А.1)`, `Таблица А.1`.
-- **Contents:** all sections, subsections, titled points, appendices and the
-  source list are present; page numbers and dot leaders align; no manual
-  «СОДЕРЖАНИЕ» heading.
-- **Headings:** sections uppercase, subsections sentence case, no hyphenation,
-  no trailing dots, one blank line before/after.
-- **Lists:** simple lists end with `;`, complex lists with `.`; lettered lists
-  use `а)`, nested items `1)`; no nested `-`.
-- **Formulas:** centred, numbered at the right edge, «где» without a colon and
-  aligned by symbols, units after a comma, decimal commas, appendix numbering.
-- **Figures:** every figure has a caption «Рисунок N.M – Название» and is
-  referenced in the text; appendix figures use letters.
-- **Tables:** caption «Таблица N.M – Название» above and left-aligned; header
-  repeats; continuation says «Продолжение таблицы N.M»; no empty cells (use a
-  dash); units and notes are correct.
-- **Appendices:** referenced in the order they appear; letters skip
-  Ё, З, Й, О, Ч, Ъ, Ы, Ь; type is `(обязательное)`, `(рекомендуемое)` or
-  `(справочное)`; no headings inside.
-- **Bibliography:** `[n]` citations ascend in order of first mention; entries
-  follow ГОСТ 7.1-2003; no Wikipedia; one bibliography block.
-- **Front matter:** title page, abstract (850–1200 characters) and task are
-  counted in page numbering but show no number; introduction ≤ 2 pages;
-  conclusion 1.5–2 pages.
-- **Volumes** (for a diploma): 60–80 pages without reference appendices;
-  economic section ≤ 18 %, labour protection 5–7 %.
+Do not recreate these rules in the document: A4 page setup; margins; Times New
+Roman 14 pt; 18 pt leading; paragraph indent; page footer; heading styling,
+numbering, and section page breaks; automatic contents; figure/table/formula
+numbers and captions; table continuations; appendix heading and letters;
+footnote layout; bibliography heading.
 
-## Limits and escalation
+In particular:
 
-- The package does **not** generate the title page, task sheet, list of
-  symbols, or specification/document list. Use `assets/title-page.typ` as a
-  starting point and verify it against СТП Appendix В and the department's
-  guidelines.
-- Exact formula spacing (6/8 intervals, Appendix М) is approximated; do not
-  promise pixel-perfect compliance.
-- If a requirement cannot be met without changing the package, say so and
-  propose the smallest change; do not silently fork the show rules in the
-  document.
-- When unsure about a normative detail, cite the clause from
-  `references/stp-requirements.md` and check the original PDF
-  (<https://www.bsuir.by/m/12_100229_1_185586.pdf>).
+- `#introduction`, `#abstract`, and `#conclusion` are unnumbered level-1
+  headings, so the template starts them on a new page.
+- The output is a one-sided A4 document; no special markup is needed.
+- Hyphenation is disabled for headings and figure/table captions.
+- After a subsection heading, write the paragraph on the immediately following
+  line. Do **not** insert a blank source line: the template already adds the
+  required vertical spacing.
+- Heading hierarchy is formatted and numbered by the template. The LLM chooses
+  only the semantic levels needed by the approved structure.
+
+## Do not add local formatting
+
+Do not apply `*bold*`, `_italic_`, `#text(weight: ...)`, `#text(style: ...)`,
+`#align`, `#set align`, or similar manual visual styling to normal text,
+headings, captions, formulas, lists, or bibliography. The template owns these
+decisions. Alignment inside table cells is the exception when the data itself
+requires it.
+
+Do not wrap a table or figure in a non-breakable block (`block(breakable:
+false)`, `block(unbreakable: true)`, or equivalent) merely to control layout.
+The package manages table pagination. Do not insert manual vertical space,
+page breaks, or empty paragraphs to manipulate page filling.
+
+Do not create rectangle, lorem ipsum, blank-image, or other illustration
+placeholders unless the user explicitly asks for one. When an image is needed
+but absent, say which file is needed and where it should be placed in the
+project, then wait for the user to add it.
+
+## Non-obvious package constraints
+
+1. Apply `#show: template` once, in the main file only.
+2. Use normal sentence case in heading source. Do not add `#upper`, manual
+   bold, alignment, numbering, page breaks, or a manual contents/bibliography
+   heading.
+3. A blank `===` is an untitled point. A titled level-3 point appears in the
+   outline. A level-4 heading drops its title, so use `====` without one.
+4. Use figures and tables through `#figure(...)`; tables require `caption:`.
+5. Put numbered figures, tables, and formulas after the first numbered section:
+   before it they receive `0.x` numbers.
+6. Put appendices last. Do not use Typst headings inside an appendix; after the
+   first appendix, figures/tables/formulas use appendix numbering.
+7. Do not nest `-` lists. Use `#abclist` for a two-level lettered list.
+8. Start a continuation of a numbered list explicitly (`4. ...`).
+9. Use references with the appropriate supplement: `@fig[]` after “на
+   рисунке”, `@tab[]` after “в таблице”, `@eq[]` after “в формуле”, and
+   `@app[приложении]` for an appendix.
+10. `#source-text` takes `path("file.ext")`, not a bare string.
+
+## Content checks the template cannot perform
+
+- Text, data, calculations, conclusions, terminology, SI units, and source
+  citations are factually correct.
+- A figure/table/appendix has a meaningful text reference and is placed after
+  the first reference where practical.
+- Tables have no unintentional empty cells, use correct units and notes, and
+  their text communicates the conclusions from the data.
+- Formulas have correct symbols, explanations, punctuation, and source
+  citations when borrowed.
+- Bibliographic records are complete and match the patterns in
+  `assets/sources.yml`; no Wikipedia or similar wiki is used; no invented
+  authors, years, publishers or pages.
+- The user-supplied title page and assignment sheet are present whenever the
+  approved structure requires them.
+
+## Limits
+
+`typo-stp` does not create title pages, assignment sheets, a list of symbols,
+specifications, or a document register. Do not substitute the old approximate
+title-page asset for an approved department form. When an exact requirement is
+not supported by the package, explain the gap and propose the smallest
+package-level change instead of stacking local show-rules into the document.
