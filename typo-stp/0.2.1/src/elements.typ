@@ -398,7 +398,7 @@
 
   // отступы перед и после рисунка
   #show figure.where(kind: image): it => {
-    v(line-height + right-leading, weak: true)
+    v(line-height, weak: true)
     it
     if it.caption == none {
       v(it.gap, weak: true)
@@ -423,7 +423,7 @@
 
   // добавление к таблице номера в специальном формате
   #show figure.where(kind: table): it => {
-    v(line-height + right-leading, weak: true)
+    v(line-height, weak: true)
 
     // обнуление счетчика шапок таблиц
     table-headers-counter.update(0)
@@ -474,10 +474,7 @@
 
           #set text(
             hyphenate: false,
-            top-edge: 1em,
-            bottom-edge: 0em
           )
-
           #context {
             // Если насчитывается более одного хедера т.е. 
             // таблица продолжается на другой странице, ставим
@@ -506,6 +503,8 @@
               // v(right-leading)
             }
           }
+          #v(- right-leading)
+
         ],
         // TODO: сделать чтобы можно было добавить повторяющийся
         // хедер с нумерованными столбцами, а не только текстом

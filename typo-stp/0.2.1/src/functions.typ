@@ -149,18 +149,24 @@
 // Функция создания grid'а из нескольких рисунков, пронумерованных "а", "б", ...
 //
 // TODO: если получится, сделать возможность ссылаться на элементы
-#let abc-images(multiimages) = grid(
+#let abc-images(images) = grid(
   // Количество столбцов - длина переданного массива 
-  columns: multiimages.len(),
+  columns: images.len(),
   column-gutter: 0.5em,
 
   // Собственно переданный массив
-  ..multiimages,
+  ..images,
 
   // Нумерация каждого элемента "а", "б", ...
-  ..multiimages.enumerate()
+  ..images.enumerate()
     .map(x => x.first())
-    .map(x => [#v(right-leading) #cyr-letters.at(x)]),
+    .map(x => [
+      #set text(
+        top-edge: 1em,
+        bottom-edge: 0em,
+      )
+      #cyr-letters.at(x)
+    ]),
   )
 )
 

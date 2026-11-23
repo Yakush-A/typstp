@@ -17,11 +17,6 @@
 // разницу между межстрочным интервалом и высотой шрифта
 #let right-leading = line-height - font-size
 
-// Отступ названия таблицы от верхней ячейки
-// (чуть-чуть костыль)
-#let table-caption-indent = 1pt
-
-
 // функция проверки заголовка на отсутствие текста
 #let is-heading-empty(h) = {
   // typst не дает нормального способа проверить,
@@ -33,7 +28,7 @@
   h.body == empty-heading.body
 }
 
-#let cyr-alphabet = "абвгдежиклмнпрстуфхцчшщэюя"
+#let cyr-alphabet = "абвгдежиклмнпрстуфхцшщэюя"
 
 // просто буквы кириллического алфавита для перечислений
 #let cyr-letters = cyr-alphabet.clusters()
