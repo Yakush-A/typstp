@@ -1,8 +1,25 @@
-#import "constants.typ" : *
-
 #let template(
+  // Экспериментальная настройка, устанавливающая оформление близкое к MS Word
+  // на данный момент только меняет интерлиньяж с 18пт на 15.9пт
+  word-like: false,
+
+  // Включение/выключение переносов во всем документе
+  hyphenate: true,
+
+  // Если установлено true, слово "СОДЕРЖАНИЕ" над содержанием будет 16пт
+  // (если не указывать - 14пт)
+  outline-title-16pt: false,
+
+  // Принудительно назначить Times New Roman для формул
+  // будет высвечиваться предупреждение при компиляции 
+  // т.к. Times - не шрифт для формул 
+  TNR-math: false,
+
   body
 ) = [
+
+  #import "constants.typ" : *
+
   // Общие настройки шрифта из 2.1.1
   #set text(
     font: main-font,
@@ -10,9 +27,11 @@
 
     // На... ~кхм~ зачем делать стандарты только под микрослоп ворд...
     top-edge: 0.70em,       // установка top-edge и bottom-edge 
-    bottom-edge: -0.3em,    // чтобы правильно работал leading
+    bottom-edge: if word-like { -0.15em } else { -0.3em }, // чтобы правильно работал leading
 
-    hyphenate: true,    // переносы
+    hyphenate: hyphenate,   // переносы
+
+    overhang: false,
 
     lang: "ru",
 
@@ -293,7 +312,9 @@
   // потому что я не понял как сделать это через title 
   // чтобы оно было по-центру и с 1 пробельной строкой
   #show outline: it => {
-    align(center)[*СОДЕРЖАНИЕ*] // слово "СОЖЕРЖАНИЕ" из 2.2.7
+    text(size: if outline-title-16pt {16pt} else {14pt})[
+      #align(center)[*СОДЕРЖАНИЕ*] // слово "СОЖЕРЖАНИЕ" из 2.2.7
+    ]
     v(1.0em, weak: false)       // пробельная строка
 
     // доп. установки для текста
@@ -447,12 +468,6 @@
     // Название таблицы будет писаться как хедер
     show figure.caption: cap => {} 
 
-    // Отключение переносов
-    set text(hyphenate: false)
-    // Отключение растягивания текста по ширине и отключение
-    // аюзацев для хедера
-    set par(first-line-indent: 0pt, justify: false)
-
     // создание новой таблицы со спец. header'ом
     table(
       fill: none,
@@ -472,9 +487,12 @@
           // 2 => продолжение
           #context table-headers-counter.step()
 
-          #set text(
-            hyphenate: false,
-          )
+          // Отключение переносов для хедера
+          #set text( hyphenate: false )
+          // Отключение растягивания текста по ширине и отключение
+          // абзацев для хедера
+          #set par(first-line-indent: 0pt, justify: false)
+
           #context {
             // Если насчитывается более одного хедера т.е. 
             // таблица продолжается на другой странице, ставим
@@ -500,10 +518,9 @@
                   #it.caption.body
                 ]
               )
-              // v(right-leading)
             }
           }
-          #v(- right-leading)
+          #if (not word-like) { v(- right-leading) }
 
         ],
         // TODO: сделать чтобы можно было добавить повторяющийся
@@ -561,6 +578,7 @@
   #set footnote.entry(
     gap: right-leading,
     clearance: 0em,
+    separator: line(stroke: 1pt, length: 30%),
   )
 
   #show footnote.entry: it => {
@@ -575,7 +593,7 @@
 
     h(1.25cm, weak: false)        // абзацный отступ
     it.note
-    [ ] 
+    sym.space.nobreak
     it.note.body
   }
 
@@ -666,9 +684,12 @@
   )
 
   #show math.equation: set text(
-    font: (
+    font: if (TNR-math) { (
+      main-font,
+      "Tex Gyre Termes Math"
+    )} else {(
       "TeX Gyre Termes Math"
-    ),
+    )},
     fallback: true
   )
 
@@ -679,9 +700,9 @@
   // всегда 8, но это "Рекомендуется",
   // так что, наверное, можно
   #show math.equation.where(block: true): it => {
-    v(1em + right-leading, weak: true)
+    v(1.2em + right-leading, weak: true)
     it 
-    v(1em + right-leading, weak: true)
+    v(1.2em + right-leading, weak: true)
   }
   // остальное по формулам вроде зависит
   // уже от того, кто пишет работу

@@ -189,3 +189,11 @@
     caption: [],
   )
 }
+
+// Формула без нумерации (для случаев, когда подставляются значения)
+#let eq(equation) = math.equation(
+  numbering: none,
+  block: true,
+  equation
+)
+
